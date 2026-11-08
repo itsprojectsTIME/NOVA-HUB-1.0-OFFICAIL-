@@ -318,14 +318,7 @@ nav a:active {
     border-radius: 8px;
     cursor: pointer;
 }
- .card {
-    background: #1e1e2e;
-    padding: 25px;
-    border-radius: 15px;
-    max-width: 700px;
-    margin: auto;
-    margin-top: 20px;
-}
+
 .container {
     background: #1e1e2e;
     padding: 25px;
@@ -345,8 +338,11 @@ nav a:active {
 }
 .admin-dashboard {
     display: grid;
-    grid-template-columns: 220px 1fr;
+    grid-template-columns: 200px minmax(0, 1fr);
     gap: 20px;
+    width: 100%;
+    align-items: start;
+    min-width: 0;
 }
 .admin-sidebar {
     background: #1c1530;
@@ -454,16 +450,6 @@ nav a:active {
     font-size: 40px;
     text-align: left;
 }
-.card-container {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
-    width: 100%;
-    padding: 25px;
-    margin: auto;
-    background: #1e1e2e;
-    border-radius: 15px;
-}
 
 .card-container .card {
     width: 100%;
@@ -471,11 +457,7 @@ nav a:active {
     margin: auto;
     background: #513b8b;
 }
-@media (max-width: 800px) {
-    .card-container {
-        grid-template-columns: 1fr;
-    }
-}
+
 #project-messages:hover {
     background: #a369fb;
     box-shadow: 0 0 0 3px #a369fb;
@@ -517,7 +499,7 @@ nav a:active {
     background: black;
     color: azure;
     border: none;
-    padding: auto;
+    padding: 10px 15px;
 }
 #openadmin h1 {
     color: white;
@@ -562,17 +544,25 @@ nav a:active {
 }
 @media (max-width: 600px) {
     .card {
-        grid-template-columns: 1fr;
-        padding: auto;
-    }
-    .topbar nav {
-        margin-right: auto;
-        margin-left: auto;
+        min-width: 0;
+        padding: 20px;
     }
 }
 .card-container {
+    display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 20px;
+    margin: auto;
+    background: #1e1e2e;
+    border-radius: 15px;
 }
+
+
+
 
 
 
@@ -581,18 +571,9 @@ nav a:active {
         grid-template-columns: minmax(0, 1fr);
     }
 }
-.card-container {
-    width: 100%;
-    max-width: 100%;
-    padding: 10px;
-    min-width: 0;
-}
-
-.card-container .card {
-    max-width: 100%;
-}
 .dashboard {
-    grid-template-columns: minmax(0, 1fr);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     width: 100%;
     padding: 10px;
     gap: 15px;
@@ -609,12 +590,32 @@ nav a:active {
 #prayertime {
     padding: 20px;
 }
-.dashboard {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-}
+
 
 @media (max-width: 800px) {
     .dashboard {
         grid-template-columns: minmax(0, 1fr);
+    }
+}
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    nav a {
+        display: block;
+        text-align: center;
+    }
+}
+@media (max-width: 700px) {
+    .admin-dashboard {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .admin-sidebar {
+        position: static;
+        min-height: auto;
     }
 }
