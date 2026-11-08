@@ -9,7 +9,7 @@ html{
 }
 @font-face {
     font-family: "Minecraft";
-    src: url("fonts/MinecraftRegular-Bmg3.otf") format("opentype");
+    src: url("MinecraftRegular-Bmg3.otf") format("opentype");
 }
 body {
     background-color: rgb(127, 95, 183);
