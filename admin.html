@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <title>Admin Panel</title>
+        <link rel="icon" type="image/jpeg" href="./I AM.... STEVEEE.jpg">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <h1 class="hero">DARK NOVA</h1>
+            <p>CONTROL CENTER</p>
+            <h2>Admin Panel</h2>
+        </header>
+        <nav>
+            <a href="#users">Manage Users</a>
+            <a href="#content">Manage Content</a>
+            <a href="dashboard.html">back to Dashboard</a>
+            <a href="index.html">back to Home</a>
+            <a href="#settings">System Settings</a>
+            <a href="#messages">Messages</a>
+            <a href="#overview">Overview</a>
+            <a href="#secret">Create Secret</a>
+            <a href="#appearance">Appearance</a>
+            <a href="#projects">Projects</a>
+        </nav>
+        <main>
+            <div class="admin-dashboard">
+                <aside class="admin-sidebar">
+                    <h2>DARK NOVA</h2>
+                    <p>CONTROL CENTER</p>
+                <h2>ADMIN MENU</h2>
+                <a href="#overview">📊Overview</a>
+                <a href="#users">👥Manage Users</a>
+                <a href="#content">📝Manage Content</a>
+                <a href="#messages">💬Messages</a>
+                <a href="#settings">⚙️Settings</a>
+                <a href="#secret">🔐Create Secret</a>
+                <a href="#appearance">🎨Appearance</a>
+                <a href="#projects">📁Projects</a>
+               </aside>
+                <div class="admin-content">
+            <section class="container" id="users">
+                <h2>Manage Users</h2>
+                <p>View and manage user accounts.</p>
+            </section>
+            <section class="container" id="content">
+                <h2>Manage Content</h2>
+                <p>View and manage site content.</p>
+            </section>
+            <section class="sidebar" id="settings">
+                <h2>System Settings</h2>
+                <p>Configure system settings and preferences.</p>
+            </section>
+            <section class="sidebar" id="messages">
+                <h2>Messages</h2>
+                <p>no messages huh?</p>
+                <input id="messageInput" type="text" placeholder="Write a message...">
+                <button id="sendMessage">SEND MESSAGE</button>
+                <h2>messages history</h2>
+                <div id="messagesList"></div>
+            </section>
+            <section class="sidebar" id="overview">
+                <h2>Overview</h2>
+                <p id="apiStatus">Checking API...</p>
+                <p>View system overview and statistics.</p>
+            </section>
+                <section class="container" id="secret">
+                    <h2>Create Secret</h2>
+                    <p>you know what to do</p>
+                </section>
+                <section class="container" id="appearance">
+                    <h2>Appearance</h2>
+                    <p>the appearance settings</p>
+                </section>
+                <section class="container" id="projects">
+                    <h2>Projects</h2>
+                    <p>Manage your projects.</p>
+                </section>
+                </div>
+            </div> 
+        </main>
+        <script src="admin.js"></script>
+    </body>
+</html>

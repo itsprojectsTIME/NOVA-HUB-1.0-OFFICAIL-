@@ -1,0 +1,563 @@
+html{
+    background-color: rgb(122, 83, 191);
+    scrollbar-width: thin;
+    scrollbar-color: rgb(158, 114, 235) rgb(0, 0, 0);
+    border: 10px solid rgb(138, 105, 195);
+    font-family: "Minecraft", sans-serif;
+    border-radius: 10px;
+    text-align: center;
+}
+@font-face {
+    font-family: "Minecraft";
+    src: url("fonts/MinecraftRegular-Bmg3.otf") format("opentype");
+}
+body {
+    background-color: rgb(127, 95, 183);
+    scrollbar-width: thin;
+    scrollbar-color: rgb(175, 147, 225) black;
+    font-family: "Minecraft", sans-serif;
+    margin: 0;
+    padding: 20px;
+    width: 100%;
+    min-height: 100vh;
+    border-radius: 20px;
+}
+* {
+    box-sizing: border-box;
+}
+
+header {
+    text-align: center;
+    padding: 30px;
+    background: #764bc1e2;
+    border-radius: 20px;
+}
+
+h1 {
+    color: black;
+    font-size: 32px;
+}
+
+p {
+    color: black;
+}
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 25px;
+    padding: 10px;
+    background: rgb(123, 84, 155);
+    border-radius: 15px;
+}
+
+nav a {
+    color: white;
+    background-color: #8e71c0e2;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: 0.2s;
+    padding: 20px;
+}
+
+nav a:hover {
+    color: white;
+    background-color: #a56bff;
+    box-shadow: 0 0 15px #a56bff;
+}
+nav a:active {
+    color: white;
+    background-color: #a56bff;
+    box-shadow: 0 0 15px #a56bff;
+    transition: 0.2s; 
+}
+
+.card h2 {
+    color: #b995ff;
+}
+
+.card p {
+    color: #d5c7f5;
+}
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 30px #a56bff;
+}
+.card-button {
+    margin-top: 15px;
+    padding: 12px 22px;
+    background: #8055d9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: "Minecraft", sans-serif;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card-button:hover {
+    background: #a56bff;
+    box-shadow: 0 0 15px #a56bff;
+}
+#notes {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #1c1530;
+    border: 2px solid #8055d9;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #8055d955;
+}
+
+#notes h2 {
+    color: #b995ff;
+}
+
+#notes p {
+    color: #d5c7f5;
+}
+#noteInput {
+    width: 100%;
+    min-height: 120px;
+    margin-top: 15px;
+    padding: 12px;
+    background: #100d1c;
+    color: white;
+    border: 2px solid #8055d9;
+    border-radius: 8px;
+    font-family: "Minecraft", sans-serif;
+    resize: vertical;
+}
+
+#noteInput:focus {
+    outline: none;
+    border-color: #b995ff;
+    box-shadow: 0 0 12px #8055d9;
+}#tasks {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #1c1530;
+    border: 2px solid #8055d9;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #8055d955;
+}
+
+#tasks h2 {
+    color: #b995ff;
+}
+
+#tasks p {
+    color: #d5c7f5;
+}
+#taskInput {
+    width: 70%;
+    padding: 12px;
+    background: #100d1c;
+    color: white;
+    border: 2px solid #8055d9;
+    border-radius: 8px;
+    font-family: "Minecraft", sans-serif;
+}
+
+#taskInput:focus {
+    outline: none;
+    border-color: #b995ff;
+    box-shadow: 0 0 12px #8055d9;
+}
+
+#addTaskButton {
+    padding: 12px 16px;
+    background: #8055d9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: "Minecraft", sans-serif;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#addTaskButton:hover {
+    background: #a56bff;
+    box-shadow: 0 0 15px #a56bff;
+}
+
+#taskList {
+    margin-top: 20px;
+    color: white;
+}#taskList li {
+    cursor: pointer;
+    padding: 8px;
+    margin: 6px 0;
+    transition: 0.2s;
+}
+
+#taskList li:hover {
+    color: #b995ff;
+}
+
+#taskList li.completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.card {
+    background: #1e1e2e;
+    padding: 25px;
+    border-radius: 15px;
+    min-height: 250px;
+    justify-content: space-between;
+}
+
+@media (max-width: 800px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 35px;
+    background: #1c1530;
+    border: 2px solid #8055d9;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #8055d955;
+}
+
+.brand h1 {
+    color: #c9aaff;
+    margin: 0;
+}
+
+.brand p {
+    color: #d5c7f5;
+    margin: 5px 0 0;
+}
+
+.topbar nav {
+    display: flex;
+    gap: 15px;
+    margin: 0;
+}
+
+.topbar nav a {
+    padding: 12px 18px;
+    transition: 0.3s;
+}
+
+.topbar nav a:hover {
+    background: #a56bff;
+    color: white;
+    box-shadow: 0 0 15px #a56bff;
+}
+
+@media (max-width: 700px) {
+    .topbar {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .topbar nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+.subscribe-button {
+    display: inline-block;
+    padding: 14px 25px;
+    background: #a56bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    box-shadow: 0 0 15px #a56bff;
+    transition: 0.3s;
+}
+
+.subscribe-button:hover {
+    background: #c9aaff;
+    box-shadow: 0 0 30px #a56bff;
+    transform: scale(1.08);
+}
+#secretTerminal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #080014;
+    color: #b995ff;
+    z-index: 9999;
+    text-align: center;
+    padding-top: 20vh;
+    font-family: monospace;
+}
+
+#secretTerminal h2 {
+    text-shadow: 0 0 20px #a56bff;
+}
+#secretTerminal p{
+    color: #8055d9;
+}
+
+#secretTerminal button {
+    padding: 12px 30px;
+    background: #8055d9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+ .card {
+    background: #1e1e2e;
+    padding: 25px;
+    border-radius: 15px;
+    max-width: 700px;
+    margin: auto;
+    margin-top: 20px;
+}
+.container {
+    background: #1e1e2e;
+    padding: 25px;
+    border-radius: 15px;
+    min-height: 250px;
+    max-width: none;
+    width: 100%;
+    justify-content: space-between;
+    margin :auto;
+    margin-top: 20px;
+    border: 2px solid #8055d9;
+}
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+.admin-dashboard {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 20px;
+}
+.admin-sidebar {
+    background: #1c1530;
+    padding: 25px;
+    border-radius: 15px;
+    min-height: 250px;
+    text-decoration: none;
+    align-items: stretch;
+    position: sticky;
+    top: 20px;
+    align-self: start;
+}
+.admin-content {
+    background: #1c1530;
+    padding: 25px;
+    border-radius: 15px;
+}
+.admin-sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: 0.2s;
+    text-align: left;
+}
+.admin-sidebar a:hover {
+    background: #8055d9;
+    color: white;
+    box-shadow: 0 0 12px #8055d9;
+}
+.admin-sidebar h2 {
+    color: #b995ff;
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+@media (max-width: 700px) {
+    .admin-dashboard {
+        grid-template-columns: 1fr;
+    }
+}
+.container {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 15px #8055d9;
+}
+#messageInput {
+    width: 100%;
+    min-height: 80px;
+    margin-top: 15px;
+    padding: 12px;
+    background: #100d1c;
+    color: white;
+    border: 2px solid #8055d9;
+    border-radius: 8px;
+    font-family: "Minecraft", sans-serif;
+    resize: vertical;
+}
+#messageInput:focus {
+    outline: none;
+    border-color: #b995ff;
+    box-shadow: 0 0 12px #8055d9;
+}
+#messageInput:hover {
+    border-color: #a56bff;
+    box-shadow: 0 0 12px #a56bff;
+    transition: 0.2s;
+}
+#messageInput:active {
+    border-color: #c9aaff;
+    box-shadow: 0 0 12px #c9aaff;
+    transition: 0.2s;
+}
+#sendMessage{
+    padding: 12px 30px;
+    background: #8055d9;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+#sendMessage:hover {
+    background: #a56bff;
+    box-shadow: 0 0 20px #a56bff;
+    transition: 0.2s;
+}
+#sendMessage:active {
+    background: #c9aaff;
+    box-shadow: 0 0 20px #c9aaff;
+    transition: 0.2s;
+    border: none;
+}
+.hero{
+    padding: 25px;
+    border-radius: 15px;
+    min-height: 250px;
+    background-size: cover;
+}
+.hero h2{
+    color: #b995ff;
+    font-size: 40px;
+    text-align: left;
+}
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+    padding: 25px;
+    margin: auto;
+    background: #1e1e2e;
+    border-radius: 15px;
+}
+
+.card-container .card {
+    width: 100%;
+    min-width: 0;
+    margin: auto;
+    background: #513b8b;
+}
+@media (max-width: 800px) {
+    .card-container {
+        grid-template-columns: 1fr;
+    }
+}
+#project-messages:hover {
+    background: #a369fb;
+    box-shadow: 0 0 0 3px #a369fb;
+    transition: transform 0.2s;
+}
+
+#java-experiments:hover {
+    box-shadow: 0 0 0 3px #a369fb;
+    transition: transform 0.2s;
+    transform: rotate(3deg) scale(1.05);
+    background: #a369fb;
+}
+#minecraft-projects {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+#minecraft-projects:hover {
+    background: #9752ff;
+    box-shadow: 0 0 15px #a369fb;
+    transform: rotate(-5deg);
+}
+#openadmin {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+
+    background: #1e1e2e;
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 30px #a369fb;
+    text-align: center;
+}
+#password {
+    border-radius: 20px;
+    background: black;
+    color: azure;
+    border: none;
+    padding: auto;
+}
+#openadmin h1 {
+    color: white;
+}
+#submit-button {
+    background: #8055d9;
+    border-radius: 10px;
+    color: white;
+    border: none;
+
+}
+#submit-button:hover {
+    box-shadow: #8055d9;
+}
+#password:active {
+    box-shadow:#9752ff;
+}
+.hero p {
+    text-align: left;
+}
+#wish {
+    justify-content: space-between;
+    row-gap: inherit;
+    margin: auto;
+}
+#prayertime {
+    padding: 60px;
+    max-width: 600px;
+    color: #8055d9;
+}
+
+#prayertime h1 {
+    color: rgb(0, 254, 0);
+}
+@media (max-width: 500px) {
+    html 
+    {
+        font-size: 15px;
+        padding: 20px;
+    }
+}
