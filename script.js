@@ -180,7 +180,7 @@ if (submitButton) {
 let country = "saudi arabia";
 let city = "riyadh";
 
-let url = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=5`;
+let url = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=4`;
 
 async function prayertime() {
     try {
@@ -280,6 +280,9 @@ for (let [loop_iguess, prayerMins] of Object.entries(prayerTimes)) {
         nextPrayer = loop_iguess;
         console.log(loop_iguess, prayerMins, currentMinutes);
     }
+}
+if (nextPrayer === null) {
+    nextPrayer = "Fajr (Tomorrow)";
 }
 document.getElementById("nextprayertime").textContent =
     "Next Prayer: " + nextPrayer;
