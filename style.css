@@ -14,12 +14,9 @@ html{
 }
 body {
     background-color: rgb(127, 95, 183);
-    scrollbar-width: thin;
-    scrollbar-color: rgb(175, 147, 225) black;
     font-family: "Minecraft", sans-serif;
     margin: 0;
     padding: 20px;
-    width: 100%;
     min-height: 100vh;
     border-radius: 20px;
 }
@@ -556,12 +553,59 @@ nav a:active {
     color: rgb(0, 254, 0);
 }
 @media (max-width: 500px) {
-    html 
-    {
+    html {
         font-size: 15px;
-        padding: 20px;
     }
 }
 * {
     font-family: "Minecraft" !important;
+}
+@media (max-width: 600px) {
+    .card {
+        grid-template-columns: 1fr;
+        padding: auto;
+    }
+    .topbar nav {
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+.card-container {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+
+
+@media (max-width: 800px) {
+    .card-container {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+.card-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    min-width: 0;
+}
+
+.card-container .card {
+    max-width: 100%;
+}
+.dashboard {
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    padding: 10px;
+    gap: 15px;
+}
+
+.dashboard > .card {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+    padding: 20px;
+}
+
+#prayertime {
+    padding: 20px;
 }
