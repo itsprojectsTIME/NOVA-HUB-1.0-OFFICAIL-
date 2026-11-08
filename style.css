@@ -10,6 +10,7 @@ html{
 @font-face {
     font-family: "Minecraft";
     src: url("MinecraftRegular-Bmg3.otf") format("opentype");
+    font-display: swap;
 }
 body {
     background-color: rgb(127, 95, 183);
