@@ -562,3 +562,6 @@ nav a:active {
         padding: 20px;
     }
 }
+* {
+    font-family: "Minecraft" !important;
+}
