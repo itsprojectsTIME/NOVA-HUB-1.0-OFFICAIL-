@@ -615,29 +615,58 @@ nav a:active {
         min-height: auto;
     }
 }
-#city-name {
+#cityname {
     background: #513b8b;
     border-radius: 10px;
     padding: 15px;
     color: #8055d9;
-    box-shadow: #9752ff;
-}
-#city-name:hover {
-    box-shadow: 0 0 #ccb3ff;
+    box-shadow: 0 0 8px #9752ff;
     transition: 0.2s;
+    cursor: pointer;
 }
-#city-name option {
+
+#cityname:hover {
+    box-shadow: 0 0 12px #b18aff;
+}
+
+#cityname option {
     background: #513b8b;
-    border-radius: 10px;
-    padding: 15px;
     color: #8055d9;
-    box-shadow: #9752ff
+    cursor: pointer;
 }
+
 #submit-city {
     background-color: #9752ff;
-    border: #a56bff;
+    border: 2px solid #a56bff;
     border-radius: 17px;
     padding: 16px;
     color: #391f61;
-    justify-content: left;
+    cursor: pointer;
+}
+#selectcity h1 {
+    color: #9752ff;
+}
+#selectcity {
+    background: #1e1e2e;
+    border: 2px solid #8055d9;
+    border-radius: 15px;
+    padding: 20px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+#selectcity button:hover {
+    box-shadow: 0 0 12px #b18aff;
+    transition: 0.3s;
+}
+#cityname:active {
+    background: #b995ff;
+    transition: 0.2s;
+}
+#submit-city:active {
+    background: #b995ff;
+    transition: 0.2s;
 }
