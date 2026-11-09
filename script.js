@@ -293,3 +293,12 @@ console.log(prayerTimes);
 }
 
 comparetime();
+function changecity() {
+    city = document.getElementById("city-name").value;
+    localStorage.setItem("city", city);
+
+    url = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=4`;
+
+    comparetime();
+}
+document.getElementById("city-name").value = city
