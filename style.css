@@ -331,11 +331,6 @@ nav a:active {
     margin-top: 20px;
     border: 2px solid #8055d9;
 }
-.dashboard {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
 .admin-dashboard {
     display: grid;
     grid-template-columns: 200px minmax(0, 1fr);
@@ -521,9 +516,10 @@ nav a:active {
     text-align: left;
 }
 #wish {
-    justify-content: space-between;
-    row-gap: inherit;
-    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 #prayertime {
     padding: 60px;
@@ -618,4 +614,30 @@ nav a:active {
         position: static;
         min-height: auto;
     }
+}
+#city-name {
+    background: #513b8b;
+    border-radius: 10px;
+    padding: 15px;
+    color: #8055d9;
+    box-shadow: #9752ff;
+}
+#city-name:hover {
+    box-shadow: 0 0 #ccb3ff;
+    transition: 0.2s;
+}
+#city-name option {
+    background: #513b8b;
+    border-radius: 10px;
+    padding: 15px;
+    color: #8055d9;
+    box-shadow: #9752ff
+}
+#submit-city {
+    background-color: #9752ff;
+    border: #a56bff;
+    border-radius: 17px;
+    padding: 16px;
+    color: #391f61;
+    justify-content: left;
 }
