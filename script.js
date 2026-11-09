@@ -178,7 +178,7 @@ if (submitButton) {
 }
 
 let country = "saudi arabia";
-let city = "riyadh";
+let city = localStorage.getItem("city") || "Select";
 
 let url = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=4`;
 
@@ -186,6 +186,7 @@ async function prayertime() {
     try {
         let response = await fetch(url);
         let data = await response.json();
+        
 
         // Store prayer times
         let fajr = data.data.timings.Fajr;
@@ -263,14 +264,7 @@ let now = new Date();
 
 let currentMinutes = now.getHours() * 60 + now.getMinutes();
 
-console.log(currentMinutes);
 
-
-console.log(fajrminutes);
-console.log(dhuhrminutes);
-console.log(asrminutes);
-console.log(maghribminutes);
-console.log(ishaminutes);
 
 
 
@@ -278,7 +272,6 @@ let nextPrayer = null;
 for (let [loop_iguess, prayerMins] of Object.entries(prayerTimes)) {
     if (prayerMins > currentMinutes && nextPrayer === null) {
         nextPrayer = loop_iguess;
-        console.log(loop_iguess, prayerMins, currentMinutes);
     }
 }
 if (nextPrayer === null) {
@@ -286,10 +279,6 @@ if (nextPrayer === null) {
 }
 document.getElementById("nextprayertime").textContent =
     "Next Prayer: " + nextPrayer;
-
-
-if (prayerTimes)
-console.log(prayerTimes);
 }
 
 comparetime();
