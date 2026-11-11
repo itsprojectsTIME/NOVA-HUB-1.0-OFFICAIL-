@@ -1,6 +1,6 @@
 async function loadapistatus() {
     try {
-        let response = await fetch("http://localhost:3000/status");
+        let response = await fetch("https://nova-hub-1-0-api.onrender.com/status");
 
         if (!response.ok) {
             throw new Error("API request failed");
@@ -37,7 +37,7 @@ sendMessage.addEventListener("click", async () => {
     }
 
     try {
-        const response = await fetch("http://localhost:3000/messages", {
+        const response = await fetch("https://nova-hub-1-0-api.onrender.com/messages", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -64,7 +64,7 @@ sendMessage.addEventListener("click", async () => {
 
 async function fetchmessages() {
     try {
-        const response = await fetch("http://localhost:3000/messages");
+        const response = await fetch("https://nova-hub-1-0-api.onrender.com/messages");
 
         if (!response.ok) {
             throw new Error("Failed to load messages");
@@ -91,7 +91,7 @@ async function getnews() {
     document.getElementById("new").textContent = "Loading news...";
 
     try {
-        const response = await fetch("http://localhost:3000/news");
+        const response = await fetch("https://nova-hub-1-0-api.onrender.com/news");
 
         if (!response.ok) {
             throw new Error("Failed to load news");

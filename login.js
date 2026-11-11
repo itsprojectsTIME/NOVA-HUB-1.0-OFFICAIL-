@@ -7,7 +7,7 @@ form.addEventListener("submit", async function(event) {
     console.log("LOGIN FORM SUBMITTED!");
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    const response = await fetch("http://localhost:3000/login", {
+    const response = await fetch("https://nova-hub-1-0-api.onrender.com/login", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"

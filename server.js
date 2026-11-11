@@ -1,20 +1,13 @@
+
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const db = require("./database/db");
 
-const result = dotenv.config();
-console.log("KEY LENGTH:", process.env.API_KEY_ARTICLE?.length);
-console.log(
-    "KEY FORMAT:",
-    /^[a-f0-9]{32}$/.test(process.env.API_KEY_ARTICLE || "")
-);
+dotenv.config();
 
-console.log("ENV PATH:", process.cwd());
-console.log("DOTENV ERROR:", result.error);
-console.log("ENV KEYS:", Object.keys(result.parsed || {}));
+const { db, initializeDatabase } = require("./database/db");
 
 
 const app = express();
@@ -38,23 +31,20 @@ app.post("/api/register", async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        const statement = db.prepare(`
-            INSERT INTO users (username, email, password)
-            VALUES (?, ?, ?)
-        `);
-
-        statement.run(
-            username.trim(),
-            email.trim().toLowerCase(),
-            hashedPassword
-        );
-
+        await db.query(`
+    INSERT INTO users (username, email, password)
+    VALUES ($1, $2, $3)
+`, [
+    username.trim(),
+    email.trim().toLowerCase(),
+    hashedPassword
+]);
         res.status(201).json({
             message: "Account created successfully!"
         });
 
     } catch (error) {
-        if (error.code === "SQLITE_CONSTRAINT_UNIQUE") {
+        if  (error.code === "23505") {
             return res.status(409).json({
                 message: "Email already registered"
             });
@@ -68,7 +58,7 @@ app.post("/api/register", async (req, res) => {
     }
 });
 app.use(session({
-    secret: process.env.SESSION_SECRET || "nova-dev-secret",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -77,7 +67,6 @@ app.use(session({
     }
 }));
 const messages = [];
-const accounts = [];
 
 app.get('/', (req, res) => {
         res.json({
@@ -148,119 +137,113 @@ app.post("/adminpass", (req, res) => {
         res.status(401).json({ success: false });
     }
 });
-app.post("/register", async (req, res) => {
-    const username = req.body.username;
-    const email = req.body.email;
-    const password = req.body.password;
-
-    if (!username || username.trim() === "") {
-        return res.status(400).json({
-            success: false,
-            error: "Username should not be empty"
-        });
-    }
-
-    if (!email || email.trim() === "") {
-        return res.status(400).json({
-            success: false,
-            error: "Email should not be empty"
-        });
-    }
-
-    if (!password) {
-        return res.status(400).json({
-            success: false,
-            error: "Password should not be empty"
-        });
-    }
-    if (password.length < 8) {
-    return res.status(400).json({
-        success: false,
-        error: "Password must be at least 8 characters"
-    });
-}
-if (accounts.some(account => account.email === email)) {
-    return res.status(409).json({
-        success: false,
-        error: "This email is already registered"
-    })
-}    
-
-const hashedPassword = await bcrypt.hash(password, 10);
-const newAccount = {
-    id: accounts.length + 1,
-    username: username,
-    email: email,
-    password: hashedPassword
-}
-accounts.push(newAccount);
-
-return res.status(201).json({
-    success: true,
-    message: "Account created successfully"
-});
-});
 app.post("/login", async (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    const account = accounts.find(account => account.email === email);
+    const { email, password } = req.body;
 
-    if (!account) {
-    return res.status(401).json({
-        success: false,
-        error: "Invalid email or password"
-    });
-}
-    const passwordMatch = await bcrypt.compare(
-    password,
-    account.password
-    );
-    if (!passwordMatch) {
+    if (!email || !password) {
+        return res.status(400).json({
+            success: false,
+            error: "Email and password are required"
+        });
+    }
+
+    try {
+const result = await db.query(`
+    SELECT * FROM users WHERE email = $1
+`, [email.trim().toLowerCase()]);
+
+const account = result.rows[0];
+
+        if (!account) {
+            return res.status(401).json({
+                success: false,
+                error: "Invalid email or password"
+            });
+        }
+
+        const passwordMatch = await bcrypt.compare(
+            password,
+            account.password
+        );
+
+        if (!passwordMatch) {
+            return res.status(401).json({
+                success: false,
+                error: "Invalid email or password"
+            });
+        }
+
+        req.session.regenerate((err) => {
+            if (err) {
+                return res.status(500).json({
+                    success: false,
+                    error: "Session creation failed"
+                });
+            }
+
+            req.session.userId = account.id;
+
+            return res.status(200).json({
+                success: true,
+                message: "Access granted",
+                username: account.username
+            });
+        });
+
+    } catch (error) {
+        console.error("Login error:", error);
+
+        res.status(500).json({
+            success: false,
+            error: "Login failed"
+        });
+    }
+});
+
+
+
+app.get("/profile", async (req, res) => {
+    if (!req.session.userId) {
         return res.status(401).json({
             success: false,
-            message: "auth failed"
-        })
-        
-}
-req.session.regenerate((err) => {
-    if (err) {
-        return res.status(500).json({
-            success: false,
-            error: "Session creation failed"
+            error: "You must log in first"
         });
     }
 
-    req.session.userId = account.id;
+    try {
+        const result = await db.query(`
+            SELECT id, username, email, role, status
+            FROM users
+            WHERE id = $1
+        `, [req.session.userId]);
 
-    return res.status(200).json({
-        success: true,
-        message: "Access granted",
-        username: account.username
-    });
+        const account = result.rows[0];
+
+        if (!account) {
+            return res.status(404).json({
+                success: false,
+                error: "Account not found"
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            username: account.username,
+            email: account.email,
+            role: account.role,
+            status: account.status
+        });
+
+    } catch (error) {
+        console.error("Profile error:", error);
+
+        return res.status(500).json({
+            success: false,
+            error: "Failed to load profile"
+        });
+    }
 });
-});
-app.get("/profile", (req, res) => {
-    if (!req.session.userId) {
-    return res.status(401).json({
-        success: false,
-        error: "You must log in first"
-    });
-}
-const account = accounts.find(
-    account => account.id === req.session.userId
-);
-    if (!account) {
-    return res.status(404).json({
-        success: false,
-        error: "Account not found"
-    });
-}
-return res.status(200).json({
-    success: true,
-    username: account.username,
-    email: account.email
-});
-});
+
 app.post("/logout", (req, res) => {
     req.session.destroy((err) => {
         if (err) {
@@ -311,7 +294,16 @@ app.get("/news", async (req, res) => {
         });
     }
 });
+const PORT = process.env.PORT || 3000;
+initializeDatabase()
+    .then(() => {
+        console.log("Neon database initialized!");
 
-app.listen(3000, () => {
-    console.log("API running at http://localhost:3000");
-});
+        app.listen(PORT, () => {
+            console.log(`API running on port ${PORT}`);
+        });
+    })
+    .catch((error) => {
+        console.error("Database initialization failed:", error);
+        process.exit(1);
+    });

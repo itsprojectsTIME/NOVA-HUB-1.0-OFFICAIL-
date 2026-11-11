@@ -13,7 +13,7 @@ if (password !== confirmPassword) {
 }
 alert("ABOUT TO CONTACT SERVER");
 try {
-    const response = await fetch("https://nova-hub.darknova.workers.dev/api/register", {
+    const response = await fetch("https://nova-hub-1-0-api.onrender.com/api/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

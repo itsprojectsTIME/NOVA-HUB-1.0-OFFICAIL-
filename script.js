@@ -74,7 +74,7 @@ async function updateClock() {
     if (!liveClock) return;
 
     try {
-        const response = await fetch("http://localhost:3000/about");
+        const response = await fetch("https://nova-hub-1-0-api.onrender.com/about");
         const data = await response.json();
 
         liveClock.textContent = new Date(data.timestamp).toLocaleString();
@@ -162,7 +162,7 @@ if (submitButton) {
     submitButton.addEventListener("click", async () => {
         const password = document.getElementById("password").value;
 
-        const response = await fetch("http://localhost:3000/adminpass", {
+        const response = await fetch("https://nova-hub-1-0-api.onrender.com/adminpass", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -312,7 +312,7 @@ async function getnews() {
     document.getElementById("new").textContent = "Loading news...";
 
     try {
-        const response = await fetch("http://localhost:3000/news");
+        const response = await fetch("https://nova-hub-1-0-api.onrender.com/news");
 
         if (!response.ok) {
             throw new Error("Failed to load news");
