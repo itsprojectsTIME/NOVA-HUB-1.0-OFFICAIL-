@@ -496,7 +496,7 @@ nav a:active {
     background: black;
     color: azure;
     border: none;
-    padding: 10px 15px;
+    padding: 10px;
 }
 #openadmin h1 {
     color: white;
@@ -506,6 +506,7 @@ nav a:active {
     border-radius: 10px;
     color: white;
     border: none;
+    padding: 10px;
 
 }
 #submit-button:hover {
@@ -847,4 +848,13 @@ section:hover,
     box-shadow:
         0 0 10px #a855f7,
         0 0 22px rgba(168, 85, 247, 0.7);
+}
+#article #new {
+    max-width: 1000px;
+    margin: auto;
+    max-height: 605px;
+}
+#news #new {
+    max-width: 674px;
+    margin: auto;
 }

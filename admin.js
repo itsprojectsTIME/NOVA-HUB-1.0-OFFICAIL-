@@ -86,8 +86,10 @@ async function fetchmessages() {
 }
 
 fetchmessages();
+
 async function getnews() {
     document.getElementById("new").textContent = "Loading news...";
+
     try {
         const response = await fetch("http://localhost:3000/news");
 
@@ -96,31 +98,34 @@ async function getnews() {
         }
 
         const data = await response.json();
-        if (!Array.isArray(data.articles)) {
-    throw new Error("Invalid news response");
-}
+
+        if (!Array.isArray(data.results)) {
+            throw new Error("Invalid news response");
+        }
 
         document.getElementById("new").innerHTML =
-            data.articles.map(article => `
+            data.results.map(article => `
                 <div class="news-card">
-    <img src="${article.image || ""}" alt="News image">
+                    <img src="${article.image_url || ""}" alt="News image">
 
-    <h3>${article.title}</h3>
+                    <h3>${article.title}</h3>
 
-    <p>${article.description || "No description available."}</p>
+                    <p>${article.description || "No description available."}</p>
 
-    <a href="${article.url}" target="_blank" rel="noopener noreferrer">
-        Read More →
-    </a>
-</div>
+                    <a href="${article.link}" target="_blank" rel="noopener noreferrer">
+                        Read More →
+                    </a>
+                </div>
             `).join("");
 
     } catch (error) {
         console.error("News error:", error);
+
         document.getElementById("new").textContent =
             "Failed to load news.";
     }
 }
+
 getnews();
 setInterval(getnews, 15 * 60 * 1000);
 

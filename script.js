@@ -186,6 +186,7 @@ let city = localStorage.getItem("city") || "Select";
 let url = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=4`;
 
 async function prayertime() {
+    if (!document.getElementById("date")) return;
     try {
         let response = await fetch(url);
         let data = await response.json();
@@ -284,8 +285,11 @@ for (let [loop_iguess, prayerMins] of Object.entries(prayerTimes)) {
 if (nextPrayer === null) {
     nextPrayer = "Fajr (Tomorrow)";
 }
-document.getElementById("nextprayertime").textContent =
-    "Next Prayer: " + nextPrayer;
+const nextPrayerElement = document.getElementById("nextprayertime");
+
+if (nextPrayerElement) {
+    nextPrayerElement.textContent = "Next Prayer: " + nextPrayer;
+}
 }
 
 comparetime();
@@ -297,10 +301,16 @@ function changecity() {
 
     comparetime();
 }
-document.getElementById("cityname").value = city
+const cityInput = document.getElementById("cityname");
+
+if (cityInput) {
+    cityInput.value = city;
+}
 prayertime()
+
 async function getnews() {
     document.getElementById("new").textContent = "Loading news...";
+
     try {
         const response = await fetch("http://localhost:3000/news");
 
@@ -309,31 +319,33 @@ async function getnews() {
         }
 
         const data = await response.json();
-        if (!Array.isArray(data.articles)) {
-    throw new Error("Invalid news response");
-}
+
+        if (!Array.isArray(data.results)) {
+            throw new Error("Invalid news response");
+        }
 
         document.getElementById("new").innerHTML =
-            data.articles.map(article => `
+            data.results.map(article => `
                 <div class="news-card">
-    <img src="${article.image || ""}" alt="News image">
+                    <img src="${article.image_url || ""}" alt="News image">
 
-    <h3>${article.title}</h3>
+                    <h3>${article.title}</h3>
 
-    <p>${article.description || "No description available."}</p>
+                    <p>${article.description || "No description available."}</p>
 
-    <a href="${article.url}" target="_blank" rel="noopener noreferrer">
-        Read More →
-    </a>
-</div>
+                    <a href="${article.link}" target="_blank" rel="noopener noreferrer">
+                        Read More →
+                    </a>
+                </div>
             `).join("");
 
     } catch (error) {
         console.error("News error:", error);
+
         document.getElementById("new").textContent =
             "Failed to load news.";
     }
 }
-getnews();
-setInterval(getnews,   15 * 60 * 1000);
 
+getnews();
+setInterval(getnews, 15 * 60 * 1000);

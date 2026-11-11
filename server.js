@@ -227,20 +227,28 @@ app.post("/logout", (req, res) => {
     })
     })
 });
+
 app.get("/news", async (req, res) => {
     try {
+        const params = new URLSearchParams({
+            apikey: process.env.API_KEY_ARTICLE,
+            country: "sa,gb,us,sy,eg",
+            language: "en",
+            category: "education,entertainment,other,politics,world"
+        });
+
         const response = await fetch(
-            `https://gnews.io/api/v4/search?apikey=${process.env.API_KEY_ARTICLE}&q=all&lang=en&max=4&in=title,description,content`
+            `https://newsdata.io/api/1/latest?${params}`
         );
 
         const data = await response.json();
 
-        if (!response.ok) {
-            console.log("GNEWS ERROR:", data);
+        if (!response.ok || data.status === "error") {
+            console.log("NEWSDATA.io ERROR:", data);
 
-            return res.status(response.status).json({
+            return res.status(response.status || 502).json({
                 success: false,
-                error: "GNews request failed"
+                error: "NewsData.io request failed"
             });
         }
 
@@ -255,7 +263,6 @@ app.get("/news", async (req, res) => {
         });
     }
 });
-
 
 app.listen(3000, () => {
     console.log("API running at http://localhost:3000");
