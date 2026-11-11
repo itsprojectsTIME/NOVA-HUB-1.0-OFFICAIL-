@@ -230,7 +230,7 @@ app.post("/logout", (req, res) => {
 app.get("/news", async (req, res) => {
     try {
         const response = await fetch(
-            `https://gnews.io/api/v4/search?apikey=${process.env.API_KEY_ARTICLE}&q=microsoft&max=10`
+            `https://gnews.io/api/v4/search?apikey=${process.env.API_KEY_ARTICLE}&q=pc+ram+microsoft+and+ai+tech&lang=en&max=4&in=title,description,content`
         );
 
         const data = await response.json();

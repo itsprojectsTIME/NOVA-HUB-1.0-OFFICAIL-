@@ -760,6 +760,7 @@ header,
 #Projects,
 #wish1 {
     background: linear-gradient(135deg, #171126, #281746);
+    padding: 10px;
 }
 
 .card-container {
@@ -803,4 +804,10 @@ button {
 
 button:hover {
     background: var(--nova-glow);
+}
+.news-card p {
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
