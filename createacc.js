@@ -1,8 +1,9 @@
-alert("NOVA HUB CREATE ACCOUNT ONLINE!");
+
 const form = document.getElementById("CreateAccountForm");
 form.addEventListener("submit", async function(event) {
 
     event.preventDefault();
+    alert("FORM SUBMITTED!");
     const username = document.getElementById("username").value;
     const email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
