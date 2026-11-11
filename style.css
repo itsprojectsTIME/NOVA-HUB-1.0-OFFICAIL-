@@ -817,6 +817,7 @@ button:hover {
     max-height: 450px;
     overflow-y: auto;
     padding: 10px;
+    scrollbar-width: none;
 }
 /* NOVA HUB — NEON GLOW BORDERS */
 nav a,
@@ -834,6 +835,7 @@ section,
         inset 0 0 8px rgba(168, 85, 247, 0.12);
 
     transition: box-shadow 0.3s ease;
+    transition: 0.2s;
 }
 
 /* EXTRA GLOW ON HOVER */
