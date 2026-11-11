@@ -146,4 +146,11 @@ nav a:hover {
     text-shadow: #b18aff
     color white;
 }
-
+@font-face {
+    font-family: "Minecraft";
+    src: url("fonts/MinecraftRegular-Bmg3.otf") format("opentype");
+    font-display: swap;
+}
+*{
+    font-family: "Minecraft", sans-serif;
+}
