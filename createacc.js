@@ -12,27 +12,26 @@ if (password !== confirmPassword) {
     return;
 }
 alert("ABOUT TO CONTACT SERVER");
-const response = await fetch("https://nova-hub.darknova.workers.dev/api/register", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        username: username,
-        email: email,
-        password: password
-    })
-});
-const data = await response.json();
+try {
+    const response = await fetch("https://nova-hub.darknova.workers.dev/api/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            username,
+            email,
+            password
+        })
+    });
 
-if (response.ok) { 
-    alert("Account created successfully!");
-    document.getElementById("informer").textContent = ("Account created successfully!")
-    window.location.href = "login.html";
-} else {
+    alert("SERVER STATUS: " + response.status);
+
+    const data = await response.json();
     document.getElementById("informer").textContent = data.message;
+
+} catch (error) {
+    alert("FETCH ERROR: " + error.message);
+    console.error(error);
 }
-alert("SERVER RESPONDED: " + response.status);
-
-
 });
