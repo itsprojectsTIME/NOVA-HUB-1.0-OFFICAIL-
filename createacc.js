@@ -12,7 +12,7 @@ if (password !== confirmPassword) {
     return;
 }
 alert("SENDING REGISTRATION REQUEST!");
-const response = await fetch("http://localhost:3000/register", {
+const response = await fetch("http://localhost:3000/api/register", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
