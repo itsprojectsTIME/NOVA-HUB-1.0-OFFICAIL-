@@ -696,7 +696,7 @@ nav a:active {
 }
 
 .news-card img {
-    width: 50%;
+    width: 70%;
     height: 190px;
     object-fit: cover;
     border-radius: 10px;
