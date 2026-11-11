@@ -3,7 +3,6 @@ const form = document.getElementById("CreateAccountForm");
 form.addEventListener("submit", async function(event) {
 
     event.preventDefault();
-    alert("FORM SUBMITTED!");
     const username = document.getElementById("username").value;
     const email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
@@ -12,6 +11,7 @@ if (password !== confirmPassword) {
     alert("Passwords do not match!");
     return;
 }
+alert("SENDING REGISTRATION REQUEST!");
 const response = await fetch("http://localhost:3000/register", {
     method: "POST",
     headers: {
