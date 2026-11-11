@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const db = require("./database/db");
 
 const result = dotenv.config();
 console.log("KEY LENGTH:", process.env.API_KEY_ARTICLE?.length);
@@ -19,6 +20,53 @@ console.log("ENV KEYS:", Object.keys(result.parsed || {}));
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.post("/api/register", async (req, res) => {
+    const { username, email, password } = req.body;
+
+    if (!username || !email || !password) {
+        return res.status(400).json({
+            message: "All fields are required"
+        });
+    }
+
+    if (password.length < 8) {
+        return res.status(400).json({
+            message: "Password must be at least 8 characters"
+        });
+    }
+
+    try {
+        const hashedPassword = await bcrypt.hash(password, 12);
+
+        const statement = db.prepare(`
+            INSERT INTO users (username, email, password)
+            VALUES (?, ?, ?)
+        `);
+
+        statement.run(
+            username.trim(),
+            email.trim().toLowerCase(),
+            hashedPassword
+        );
+
+        res.status(201).json({
+            message: "Account created successfully!"
+        });
+
+    } catch (error) {
+        if (error.code === "SQLITE_CONSTRAINT_UNIQUE") {
+            return res.status(409).json({
+                message: "Email already registered"
+            });
+        }
+
+        console.error(error);
+
+        res.status(500).json({
+            message: "Something went wrong"
+        });
+    }
+});
 app.use(session({
     secret: process.env.SESSION_SECRET || "nova-dev-secret",
     resave: false,

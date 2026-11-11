@@ -1,4 +1,4 @@
-console.log("NOVA HUB CREATE ACCOUNT ONLINE!");
+alert("NOVA HUB CREATE ACCOUNT ONLINE!");
 const form = document.getElementById("CreateAccountForm");
 form.addEventListener("submit", async function(event) {
 
@@ -24,12 +24,12 @@ const response = await fetch("http://localhost:3000/register", {
 });
 const data = await response.json();
 
-if (data.success) {
+if (response.ok) { 
     alert("Account created successfully!");
     document.getElementById("informer").textContent = ("Account created successfully!")
     window.location.href = "login.html";
 } else {
-    document.getElementById("informer").textContent = (data.error);
+    document.getElementById("informer").textContent = data.message;
 }
 
 
