@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA HUB | Dashboard</title>
+    <link rel="icon" type="image/jpeg" href="./I AM.... STEVEEE.jpg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<div id="secretTerminal">
+    <h2>☠ DARK NOVA SYSTEM ☠</h2>
+    <p>ACCESS GRANTED...</p>
+    <p>You weren't supposed to find this.</p>
+    <button onclick="closeSecret()">EXIT</button>
+</div>
+<body>
+
+<header class="topbar">
+    <div class="brand">
+        <h1>NOVA HUB</h1>
+        <p>Dark Nova's Dashboard</p>
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="#notes">Notes</a>
+        <a href="#tasks">Tasks</a>
+        <a href="#ideas">Ideas</a>
+        <a href="login.html">Login</a>
+    </nav>
+    <a class="subscribe-button"
+   href="https://www.youtube.com/@DarkNova1232"
+   target="_blank">
+   SUBSCRIBE
+</a>
+</header>
+
+<main>
+    <div class="dashboard">
+
+        <section class="card" id="notes">
+            <h2>My Notes</h2>
+            <p>Your notes will live here.</p>
+            <textarea id="noteInput" placeholder="Write your notes here..."></textarea>
+        </section>
+
+        <section class="card" id="tasks">
+            <h2>My Tasks</h2>
+            <p>Things I need to get done.</p>
+            <input type="text" id="taskInput" placeholder="Enter a task...">
+            <button id="addTaskButton">Add Task</button>
+            <ul id="taskList"></ul>
+        </section>
+
+        <section class="card" id="time">
+            <h2 id="liveClock">Loading time...</h2>
+        </section>
+        <section class="card" id="prayertime">
+            <h2>Prayer times</h2>
+            <h1 id="nextprayertime">LOADING...</h1>
+            <h2 id="date"></h2>
+            <h4 id="fajr">LOADING-fajr</h4>
+            <h4 id="duhr">LOADING-duhr</h4>
+            <h4 id="asr">LOADING-asr</h4>
+            <h4 id="maghrib">LOADING-magrib</h4>
+            <h4 id="isha">LOADING-isha</h4>
+        </section>
+        <section  class="card" id="selectcity">
+        <h1>Select city for prayer time.</h1>
+        <select id="cityname">
+        <option value="Select">Select</option>
+        <option value="Riyadh">Riyadh</option>
+        <option value="Dammam">Dammam</option>
+        <option value="Buraydah">Buraydah</option>
+        <option value="Hama">Hama</option>
+        <option value="Damascus">Damascus</option>
+        <option value="Homs">Homs</option>
+        </select>
+        <button id="submit-city" onclick="changecity()">Change city</button>
+        </section>
+        <article id="news" class="card">
+                    <h1>Whats new</h1>
+                <h1 id="new"></h1>
+         </article>
+
+    </div>
+</main>
+
+<script src="script.js"></script>
+</body>
+<footer>
+    <p>&copy; Nova hub Copyright All rights reserved.</p>
+</footer>
+</html>

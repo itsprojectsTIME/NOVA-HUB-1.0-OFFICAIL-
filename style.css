@@ -1,0 +1,806 @@
+html{
+    background: linear-gradient(109deg, #1e1e2e, #452796, #371a71);
+    scrollbar-width: thin;
+    scrollbar-color: rgb(158, 114, 235) rgb(0, 0, 0);
+    font-family: "Minecraft", sans-serif;
+    border-radius: 10px;
+    text-align: center;
+}
+@font-face {
+    font-family: "Minecraft";
+    src: url("fonts/MinecraftRegular-Bmg3.otf") format("opentype");
+    font-display: swap;
+}
+body {
+    background: linear-gradient(196deg, #1e1e2e, #1b0c43, #8055d9);
+    font-family: "Minecraft", sans-serif;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    border-radius: 20px;
+}
+* {
+    box-sizing: border-box;
+    text-shadow: 0 0  12px #8055d9;
+    border-radius: 12px;
+}
+
+header {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(196deg, #1e1e2e, #1b0c43, #8055d9);
+    border-radius: 20px;
+}
+
+h1 {
+    color: black;
+    font-size: 32px;
+}
+
+p {
+    color: black;
+}
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 25px;
+    padding: 10px;
+    background: linear-gradient(96deg, #513a75, #7249da, #41227f);
+    border-radius: 15px;
+}
+
+nav a {
+    color: white;
+    background-color: #8e71c0e2;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: 0.2s;
+    padding: 20px;
+}
+
+nav a:hover {
+    color: white;
+    background-color: #a56bff;
+    box-shadow: 0 0 15px #a56bff;
+}
+nav a:active {
+    color: white;
+    background-color: #a56bff;
+    box-shadow: 0 0 15px #a56bff;
+    transition: 0.2s; 
+}
+
+.card h2 {
+    color: #b995ff;
+}
+
+.card p {
+    color: #d5c7f5;
+}
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 30px #a56bff;
+}
+.card-button {
+    margin-top: 15px;
+    padding: 12px 22px;
+    background: #8055d9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: "Minecraft", sans-serif;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card-button:hover {
+    background: #a56bff;
+    box-shadow: 0 0 15px #a56bff;
+}
+#notes {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #1c1530;
+    border: 2px solid #8055d9;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #8055d955;
+}
+
+#notes h2 {
+    color: #b995ff;
+}
+
+#notes p {
+    color: #d5c7f5;
+}
+#noteInput {
+    width: 100%;
+    min-height: 120px;
+    margin-top: 15px;
+    padding: 12px;
+    background: #100d1c;
+    color: white;
+    border: 2px solid #8055d9;
+    border-radius: 8px;
+    font-family: "Minecraft", sans-serif;
+    resize: vertical;
+}
+
+#noteInput:focus {
+    outline: none;
+    border-color: #b995ff;
+    box-shadow: 0 0 12px #8055d9;
+}#tasks {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #1c1530;
+    border: 2px solid #8055d9;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #8055d955;
+}
+
+#tasks h2 {
+    color: #b995ff;
+}
+
+#tasks p {
+    color: #d5c7f5;
+}
+#taskInput {
+    width: 70%;
+    padding: 12px;
+    background: #100d1c;
+    color: white;
+    border: 2px solid #8055d9;
+    border-radius: 8px;
+    font-family: "Minecraft", sans-serif;
+}
+
+#taskInput:focus {
+    outline: none;
+    border-color: #b995ff;
+    box-shadow: 0 0 12px #8055d9;
+}
+
+#addTaskButton {
+    padding: 12px 16px;
+    background: #8055d9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: "Minecraft", sans-serif;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#addTaskButton:hover {
+    background: #a56bff;
+    box-shadow: 0 0 15px #a56bff;
+}
+
+#taskList {
+    margin-top: 20px;
+    color: white;
+}#taskList li {
+    cursor: pointer;
+    padding: 8px;
+    margin: 6px 0;
+    transition: 0.2s;
+}
+
+#taskList li:hover {
+    color: #b995ff;
+}
+
+#taskList li.completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.card {
+    background: #1e1e2e;
+    padding: 25px;
+    border-radius: 15px;
+    min-height: 250px;
+    justify-content: space-between;
+}
+
+@media (max-width: 800px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 35px;
+    background: #1c1530;
+    border: 2px solid #8055d9;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #8055d955;
+}
+
+.brand h1 {
+    color: #c9aaff;
+    margin: 0;
+}
+
+.brand p {
+    color: #d5c7f5;
+    margin: 5px 0 0;
+}
+
+.topbar nav {
+    display: flex;
+    gap: 15px;
+    margin: 0;
+}
+
+.topbar nav a {
+    padding: 12px 18px;
+    transition: 0.3s;
+}
+
+.topbar nav a:hover {
+    background: #a56bff;
+    color: white;
+    box-shadow: 0 0 15px #a56bff;
+}
+
+@media (max-width: 700px) {
+    .topbar {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .topbar nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+.subscribe-button {
+    display: inline-block;
+    padding: 14px 25px;
+    background: #a56bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    box-shadow: 0 0 15px #a56bff;
+    transition: 0.3s;
+}
+
+.subscribe-button:hover {
+    background: #c9aaff;
+    box-shadow: 0 0 30px #a56bff;
+    transform: scale(1.08);
+}
+#secretTerminal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #080014;
+    color: #b995ff;
+    z-index: 9999;
+    text-align: center;
+    padding-top: 20vh;
+    font-family: monospace;
+}
+
+#secretTerminal h2 {
+    text-shadow: 0 0 20px #a56bff;
+}
+#secretTerminal p{
+    color: #8055d9;
+}
+
+#secretTerminal button {
+    padding: 12px 30px;
+    background: #8055d9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.container {
+    background: #1e1e2e;
+    padding: 25px;
+    border-radius: 15px;
+    min-height: 250px;
+    max-width: none;
+    width: 100%;
+    justify-content: space-between;
+    margin :auto;
+    margin-top: 20px;
+    border: 2px solid #8055d9;
+}
+.admin-dashboard {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 20px;
+    width: 100%;
+    align-items: start;
+    min-width: 0;
+}
+.admin-sidebar {
+    background: #1c1530;
+    padding: 25px;
+    border-radius: 15px;
+    min-height: 250px;
+    text-decoration: none;
+    align-items: stretch;
+    position: sticky;
+    top: 20px;
+    align-self: start;
+}
+.admin-content {
+    background: #1c1530;
+    padding: 25px;
+    border-radius: 15px;
+}
+.admin-sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: 0.2s;
+    text-align: left;
+}
+.admin-sidebar a:hover {
+    background: #8055d9;
+    color: white;
+    box-shadow: 0 0 12px #8055d9;
+}
+.admin-sidebar h2 {
+    color: #b995ff;
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+@media (max-width: 700px) {
+    .admin-dashboard {
+        grid-template-columns: 1fr;
+    }
+}
+.container {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 15px #8055d9;
+}
+#messageInput {
+    width: 100%;
+    min-height: 80px;
+    margin-top: 15px;
+    padding: 12px;
+    background: #100d1c;
+    color: white;
+    border: 2px solid #8055d9;
+    border-radius: 8px;
+    font-family: "Minecraft", sans-serif;
+    resize: vertical;
+}
+#messageInput:focus {
+    outline: none;
+    border-color: #b995ff;
+    box-shadow: 0 0 12px #8055d9;
+}
+#messageInput:hover {
+    border-color: #a56bff;
+    box-shadow: 0 0 12px #a56bff;
+    transition: 0.2s;
+}
+#messageInput:active {
+    border-color: #c9aaff;
+    box-shadow: 0 0 12px #c9aaff;
+    transition: 0.2s;
+}
+#sendMessage{
+    padding: 12px 30px;
+    background: #8055d9;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+#sendMessage:hover {
+    background: #a56bff;
+    box-shadow: 0 0 20px #a56bff;
+    transition: 0.2s;
+}
+#sendMessage:active {
+    background: #c9aaff;
+    box-shadow: 0 0 20px #c9aaff;
+    transition: 0.2s;
+    border: none;
+}
+.hero{
+    padding: 25px;
+    border-radius: 15px;
+    min-height: 250px;
+    background-size: cover;
+}
+.hero h2{
+    color: #b995ff;
+    font-size: 40px;
+    text-align: left;
+}
+
+.card-container .card {
+    width: 100%;
+    min-width: 0;
+    margin: auto;
+    background: #513b8b;
+}
+
+#project-messages:hover {
+    background: #a369fb;
+    box-shadow: 0 0 0 3px #a369fb;
+    transition: transform 0.2s;
+}
+
+#java-experiments:hover {
+    box-shadow: 0 0 0 3px #a369fb;
+    transition: transform 0.2s;
+    transform: rotate(3deg) scale(1.05);
+    background: #a369fb;
+}
+#minecraft-projects {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+#minecraft-projects:hover {
+    background: #9752ff;
+    box-shadow: 0 0 15px #a369fb;
+    transform: rotate(-5deg);
+}
+#openadmin {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+
+    background: #1e1e2e;
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 30px #a369fb;
+    text-align: center;
+}
+#password {
+    border-radius: 20px;
+    background: black;
+    color: azure;
+    border: none;
+    padding: 10px 15px;
+}
+#openadmin h1 {
+    color: white;
+}
+#submit-button {
+    background: #8055d9;
+    border-radius: 10px;
+    color: white;
+    border: none;
+
+}
+#submit-button:hover {
+    box-shadow: #8055d9;
+}
+#password:active {
+    box-shadow:#9752ff;
+}
+.hero p {
+    text-align: left;
+}
+#wish {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+#prayertime {
+    padding: 60px;
+    max-width: 600px;
+    color: #8055d9;
+}
+
+#prayertime h1 {
+    color: rgb(0, 254, 0);
+}
+@media (max-width: 500px) {
+    html {
+        font-size: 15px;
+    }
+}
+* {
+    font-family: "Minecraft" !important;
+}
+@media (max-width: 600px) {
+    .card {
+        min-width: 0;
+        padding: 20px;
+    }
+}
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 20px;
+    margin: auto;
+    background: #1e1e2e;
+    border-radius: 15px;
+}
+
+
+
+
+
+
+@media (max-width: 800px) {
+    .card-container {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    padding: 10px;
+    gap: 15px;
+}
+
+.dashboard > .card {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+    padding: 20px;
+}
+
+#prayertime {
+    padding: 20px;
+}
+
+
+@media (max-width: 800px) {
+    .dashboard {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    nav a {
+        display: block;
+        text-align: center;
+    }
+}
+@media (max-width: 700px) {
+    .admin-dashboard {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .admin-sidebar {
+        position: static;
+        min-height: auto;
+    }
+}
+#cityname {
+    background: #513b8b;
+    border-radius: 10px;
+    padding: 15px;
+    color: #8055d9;
+    box-shadow: 0 0 8px #9752ff;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+#cityname:hover {
+    box-shadow: 0 0 12px #b18aff;
+}
+
+#cityname option {
+    background: #513b8b;
+    color: #8055d9;
+    cursor: pointer;
+}
+
+#submit-city {
+    background-color: #9752ff;
+    border: 2px solid #a56bff;
+    border-radius: 17px;
+    padding: 16px;
+    color: #391f61;
+    cursor: pointer;
+}
+#selectcity h1 {
+    color: #9752ff;
+}
+#selectcity {
+    background: #1e1e2e;
+    border: 2px solid #8055d9;
+    border-radius: 15px;
+    padding: 20px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+#selectcity button:hover {
+    box-shadow: 0 0 12px #b18aff;
+    transition: 0.3s;
+}
+#cityname:active {
+    background: #b995ff;
+    transition: 0.2s;
+}
+#submit-city:active {
+    background: #b995ff;
+    transition: 0.2s;
+}
+* {
+    text-transform: 0.2s;
+    text-shadow:0 0 12px #8055d9;
+}
+.card {
+    border: 0 0 17px #7249da;
+}
+
+.news-card {
+    background: #171326;
+    border: 1px solid #35265c;
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 18px;
+    transition: 0.2s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-3px);
+    border-color: #9b5cff;
+}
+
+.news-card img {
+    width: 50%;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.news-card h3 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.news-card p {
+    color: #c5bfd6;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.news-card a {
+    display: inline-block;
+    color: #b98aff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.news-card a:hover {
+    color: white;
+    text-decoration: underline;
+}
+#Projects {
+    background: linear-gradient(195deg, #1e1e2e, #452796, #371a71);
+}
+#wish1 {
+    background: linear-gradient(195deg, #1e1e2e, #452796, #371a71);
+}
+
+/* NOVA HUB - Theme Upgrade */
+
+:root {
+    --nova-bg: #100b1c;
+    --nova-panel: #1c1530;
+    --nova-card: #261b3d;
+    --nova-purple: #8055d9;
+    --nova-glow: #a56bff;
+    --nova-heading: #c9aaff;
+    --nova-text: #f5efff;
+    --nova-muted: #d5c7f5;
+}
+
+body {
+    background: linear-gradient(135deg, #100b1c, #1b0c43, #302052);
+    color: var(--nova-text);
+}
+
+h1, h2, h3 {
+    color: var(--nova-heading);
+}
+
+p {
+    color: var(--nova-muted);
+}
+
+header,
+#Projects,
+#wish1 {
+    background: linear-gradient(135deg, #171126, #281746);
+}
+
+.card-container {
+    background: transparent;
+}
+
+.card,
+.container,
+.admin-content,
+.admin-sidebar {
+    background: var(--nova-panel);
+    border: 1px solid #49336b;
+}
+
+.card h2,
+.admin-sidebar h2 {
+    color: var(--nova-heading);
+}
+
+.card p {
+    color: var(--nova-muted);
+}
+
+nav {
+    background: #211536;
+    border: 1px solid #49336b;
+}
+
+nav a {
+    background: #352451;
+}
+
+nav a:hover {
+    background: var(--nova-purple);
+}
+
+button {
+    background: var(--nova-purple);
+    color: white;
+}
+
+button:hover {
+    background: var(--nova-glow);
+}

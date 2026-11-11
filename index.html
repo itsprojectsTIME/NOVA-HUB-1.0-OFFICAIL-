@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA HUB | Dark Nova</title>
+    <link rel="icon" type="image/jpeg" href="./I AM.... STEVEEE.jpg">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <main>
+            <div class="hero">
+                <h2>Welcome, Dark Nova!</h2>
+                <p>Your command center is ready.</p>
+                <button class="card-button" onclick="window.location.href='dashboard.html'">
+                    Open Dashboard
+                </button>
+            </div>
+        </main>
+
+        <nav>
+            <a href="#wish">my wish</a>
+            <a href="#Projects">Projects</a>
+            <a href="login.html">Login</a>
+        </nav>
+
+        <!-- YouTube badge -->
+        <div class="card-container" id="wish1">
+            <div class="card" id="wish">
+                <h2>My Wish</h2>
+                <p>To be verified on YouTube</p>
+                <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/960px-Twitter_Verified_Badge.svg.png?utm_source=ar.wikipedia.org&utm_campaign=index&utm_content=thumbnail" alt="Verified Badge" width="50">
+            </div>
+            <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/jt8JZbTh8Zg?si=v3vkjm5xeo-18Got" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <!-- Projects -->
+        <section id="Projects">
+            <h2>Projects</h2>
+            <p>Explore my latest projects and ideas.</p>
+
+            <div class="card-container">
+                <div class="card" id="project-messages">
+                    <h3>Messages</h3>
+                    <p>We build a messaging system like Telegram and WhatsApp.</p>
+                </div>
+
+                <div class="card" id="java-experiments">
+                    <h3>Java Experiments</h3>
+                    <p>We build Java experiments like a calculator.</p>
+                </div>
+
+                <div class="card" id="minecraft-projects">
+                    <h3>Minecraft Projects</h3>
+                    <p>We build Minecraft mods and plugins.</p>
+                </div>
+            </div>
+        </section>
+    </header>
+    <div id="openadmin">
+        <h1>ENTER PASSWORD</h1>
+        <input type="password" id="password" placeholder="ENTER PASSWORD">
+        <button id="submit-button">submit</button>
+    </div>
+    <article>
+        <h1>whats new</h1>
+    </article>
+
+    <script src="script.js"></script>
+</body>
+<footer>
+    <p>&copy; Nova hub Copyright All rights reserved.</p>
+</footer>
+</html>
