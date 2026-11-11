@@ -11,7 +11,7 @@ if (password !== confirmPassword) {
     alert("Passwords do not match!");
     return;
 }
-alert("SENDING REGISTRATION REQUEST!");
+alert("ABOUT TO CONTACT SERVER");
 const response = await fetch("https://nova-hub.darknova.workers.dev/api/register", {
     method: "POST",
     headers: {
@@ -32,6 +32,7 @@ if (response.ok) {
 } else {
     document.getElementById("informer").textContent = data.message;
 }
+alert("SERVER RESPONDED: " + response.status);
 
 
 });
