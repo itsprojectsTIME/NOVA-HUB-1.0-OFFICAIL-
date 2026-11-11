@@ -18,7 +18,7 @@
             <label for="email">Email*</label>
             <input type="email" id="email" placeholder="please enter your info..." required>
             <label for="password">password:</label>
-            <input type="password" id="password" placeholder="please enter your password..." required minlength="8" maxlength="40" pattern="[A-Za-z0-9]+" title="Use 8–40 characters, including at least one letter and one number.">
+            <input type="password" id="password" placeholder="please enter your password..." required minlength="8" maxlength="40" pattern="(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{8,40}" title="Use 8–40 characters, including at least one letter and one number.">
             <label for="confirmPassword">Confirm Password:</label>
             <input type="password" id="confirmPassword" placeholder="Confirm your password" required title="Use 8–40 characters, including at least one letter and one number.">
             <p id="informer" style="color: red;"></p>
