@@ -148,20 +148,92 @@ async function loadUsers() {
         }
 
         usersList.innerHTML = "";
+data.users.forEach(user => {
+    const userCard = document.createElement("div");
 
-        data.users.forEach(user => {
-            const userCard = document.createElement("div");
+    const info = document.createElement("p");
+    info.textContent =
+        `${user.username} | ${user.email} | ${user.role} | ${user.status}`;
 
-            userCard.textContent =
-                `${user.username} | ${user.email} | ${user.role} | ${user.status}`;
+    const roleBtn = document.createElement("button");
+    roleBtn.textContent =
+        user.role === "admin" ? "Remove Admin" : "Make Admin";
 
-            usersList.appendChild(userCard);
-        });
+    roleBtn.onclick = () => updateUser(
+        user.id,
+        "role",
+        user.role === "admin" ? "user" : "admin"
+    );
+
+    const statusBtn = document.createElement("button");
+    statusBtn.textContent =
+        user.status === "active" ? "Suspend" : "Activate";
+
+    statusBtn.onclick = () => updateUser(
+        user.id,
+        "status",
+        user.status === "active" ? "suspended" : "active"
+    );
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete User";
+    deleteBtn.onclick = () => deleteUser(user.id, user.username);
+
+    userCard.append(info, roleBtn, statusBtn, deleteBtn);
+    usersList.appendChild(userCard);
+});
 
     } catch (error) {
         console.error("Users error:", error);
         usersList.textContent = error.message;
     }
 }
+async function updateUser(userId, type, value) {
+    try {
+        const response = await fetch(
+            `https://nova-hub-1-0-api.onrender.com/api/admin/users/${userId}/${type}`,
+            {
+                method: "PATCH",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ [type]: value })
+            }
+        );
 
+        const data = await response.json();
+
+        if (!response.ok) throw new Error(data.message);
+
+        alert(data.message);
+        loadUsers();
+    } catch (error) {
+        alert(error.message);
+    }
+}
+async function deleteUser(userId, username) {
+    if (!confirm(`Are you sure you want to delete ${username}?`)) {
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            `https://nova-hub-1-0-api.onrender.com/api/admin/users/${userId}`,
+            {
+                method: "DELETE",
+                credentials: "include"
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) throw new Error(data.message);
+
+        alert(data.message);
+        loadUsers();
+    } catch (error) {
+        alert(error.message);
+    }
+}
 loadUsers();

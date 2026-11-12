@@ -121,6 +121,143 @@ app.get("/api/admin/users", isAdmin, async (req, res) => {
             message: "Failed to fetch users"
         });
     }
+    }); 
+    app.patch("/api/admin/users/:id/role", isAdmin, async (req, res) => {
+    const userId = Number(req.params.id);
+    const { role } = req.body;
+
+    if (!Number.isInteger(userId) || !["admin", "user"].includes(role)) {
+        return res.status(400).json({
+            message: "Invalid user ID or role"
+        });
+    }
+
+    if (userId === req.session.userId) {
+        return res.status(403).json({
+            message: "You cannot change your own role"
+        });
+    }
+
+    try {
+        const target = await db.query(
+            "SELECT role FROM users WHERE id = $1",
+            [userId]
+        );
+
+        if (target.rows.length === 0) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+
+        if (target.rows[0].role === "admin" && role === "user") {
+            const admins = await db.query(
+                "SELECT COUNT(*) FROM users WHERE role = 'admin'"
+            );
+
+            if (Number(admins.rows[0].count) <= 1) {
+                return res.status(400).json({
+                    message: "Cannot remove the last admin"
+                });
+            }
+        }
+
+        await db.query(
+            "UPDATE users SET role = $1 WHERE id = $2",
+            [role, userId]
+        );
+
+        res.json({
+            success: true,
+            message: "User role updated!"
+        });
+
+    } catch (error) {
+        console.error("Role update error:", error);
+        res.status(500).json({
+            message: "Failed to update role"
+        });
+    }
+});
+app.patch("/api/admin/users/:id/status", isAdmin, async (req, res) => {
+    const userId = Number(req.params.id);
+    const { status } = req.body;
+
+    if (!Number.isInteger(userId) ||
+        !["active", "suspended"].includes(status)) {
+        return res.status(400).json({
+            message: "Invalid user ID or status"
+        });
+    }
+
+    if (userId === req.session.userId) {
+        return res.status(403).json({
+            message: "You cannot change your own status"
+        });
+    }
+
+    try {
+        const result = await db.query(
+            "UPDATE users SET status = $1 WHERE id = $2 RETURNING id",
+            [status, userId]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+
+        res.json({
+            success: true,
+            message: `User ${status} successfully!`
+        });
+
+    } catch (error) {
+        console.error("Status update error:", error);
+        res.status(500).json({
+            message: "Failed to update user status"
+        });
+    }
+});
+app.delete("/api/admin/users/:id", isAdmin, async (req, res) => {
+    const userId = Number(req.params.id);
+
+    if (!Number.isInteger(userId)) {
+        return res.status(400).json({
+            message: "Invalid user ID"
+        });
+    }
+
+    if (userId === req.session.userId) {
+        return res.status(403).json({
+            message: "You cannot delete your own account"
+        });
+    }
+
+    try {
+        const result = await db.query(
+            "DELETE FROM users WHERE id = $1 RETURNING id",
+            [userId]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+
+        res.json({
+            success: true,
+            message: "User deleted successfully!"
+        });
+
+    } catch (error) {
+        console.error("Delete user error:", error);
+        res.status(500).json({
+            message: "Failed to delete user"
+        });
+    }
 });
 const messages = [];
 
