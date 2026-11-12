@@ -12,7 +12,10 @@ const { db, initializeDatabase } = require("./database/db");
 
 const app = express();
 app.use(cors({
-    origin: "https://nova-hub.darknova.workers.dev",
+    origin: [
+        "https://nova-hub.darknova.workers.dev",
+        "http://127.0.0.1:5500"
+    ],
     credentials: true
 }));
 app.use(express.json());
