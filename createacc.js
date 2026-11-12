@@ -13,11 +13,12 @@ if (password !== confirmPassword) {
 }
 alert("ABOUT TO CONTACT SERVER");
 try {
-    const response = await fetch("https://nova-hub-1-0-api.onrender.com/api/register", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+const response = await fetch("https://nova-hub-1-0-api.onrender.com/api/register", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+        "Content-Type": "application/json"
+    },
         body: JSON.stringify({
             username,
             email,

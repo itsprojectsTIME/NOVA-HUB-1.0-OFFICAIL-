@@ -128,4 +128,40 @@ async function getnews() {
 
 getnews();
 setInterval(getnews, 15 * 60 * 1000);
+async function loadUsers() {
+    const usersList = document.getElementById("usersList");
 
+    usersList.textContent = "Loading users...";
+
+    try {
+        const response = await fetch(
+            "https://nova-hub-1-0-api.onrender.com/api/admin/users",
+            {
+                credentials: "include"
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || "Failed to load users");
+        }
+
+        usersList.innerHTML = "";
+
+        data.users.forEach(user => {
+            const userCard = document.createElement("div");
+
+            userCard.textContent =
+                `${user.username} | ${user.email} | ${user.role} | ${user.status}`;
+
+            usersList.appendChild(userCard);
+        });
+
+    } catch (error) {
+        console.error("Users error:", error);
+        usersList.textContent = error.message;
+    }
+}
+
+loadUsers();

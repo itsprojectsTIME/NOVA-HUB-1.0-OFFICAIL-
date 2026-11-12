@@ -11,7 +11,10 @@ const { db, initializeDatabase } = require("./database/db");
 
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: "https://nova-hub.darknova.workers.dev",
+    credentials: true
+}));
 app.use(express.json());
 app.post("/api/register", async (req, res) => {
     const { username, email, password } = req.body;
@@ -57,15 +60,65 @@ app.post("/api/register", async (req, res) => {
         });
     }
 });
+app.set("trust proxy", 1);
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: {
-        httpOnly: true,
-        sameSite: "lax"
-    }
+cookie: {
+    httpOnly: true,
+    sameSite: "none",
+    secure: true
+}
 }));
+async function isAdmin(req, res, next) {
+    try {
+        if (!req.session?.userId) {
+            return res.status(401).json({
+                message: "Please log in"
+            });
+        }
+
+        const result = await db.query(
+            "SELECT role FROM users WHERE id = $1",
+            [req.session.userId]
+        );
+
+        if (result.rows.length === 0 ||
+            result.rows[0].role !== "admin") {
+            return res.status(403).json({
+                message: "Admin access required"
+            });
+        }
+
+        next();
+    } catch (error) {
+        console.error("Admin check error:", error);
+        res.status(500).json({
+            message: "Server error"
+        });
+    }
+}
+app.get("/api/admin/users", isAdmin, async (req, res) => {
+    try {
+        const result = await db.query(
+            `SELECT id, username, email, role, status, created_at
+             FROM users
+             ORDER BY created_at DESC`
+        );
+
+        res.json({
+            success: true,
+            users: result.rows
+        });
+
+    } catch (error) {
+        console.error("Fetch users error:", error);
+        res.status(500).json({
+            message: "Failed to fetch users"
+        });
+    }
+});
 const messages = [];
 
 app.get('/', (req, res) => {
