@@ -346,6 +346,7 @@ const result = await db.query(`
 `, [email.trim().toLowerCase()]);
 
 const account = result.rows[0];
+console.log("LOGIN ACCOUNT STATUS:", account?.status);
 
         if (!account) {
             return res.status(401).json({
