@@ -353,6 +353,12 @@ const account = result.rows[0];
                 error: "Invalid email or password"
             });
         }
+        if (account.status !== "active") {
+    return res.status(403).json({
+        success: false,
+        error: "Your account is suspended"
+    });
+}
 
         const passwordMatch = await bcrypt.compare(
             password,
