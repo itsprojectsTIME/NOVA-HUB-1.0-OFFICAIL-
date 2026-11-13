@@ -130,4 +130,8 @@ const cityInput = document.getElementById("cityname");
 if (cityInput) {
     cityInput.value = city;
 }
-prayertime()
+prayertime();
+const link = ``
+async function getprayerrecords() {
+    const response = await fetch()
+}

@@ -492,19 +492,6 @@ app.get("/news", async (req, res) => {
         });
     }
 });
-const PORT = process.env.PORT || 3000;
-initializeDatabase()
-    .then(() => {
-        console.log("Neon database initialized!");
-
-        app.listen(PORT, () => {
-            console.log(`API running on port ${PORT}`);
-        });
-    })
-    .catch((error) => {
-        console.error("Database initialization failed:", error);
-        process.exit(1);
-    });
 app.post("/saveprayer", async (req, res) => {
     if (!req.session?.userId) {
         return res.status(401).json({
@@ -544,13 +531,12 @@ if (
 }
 try {
     await db.query(
-    `INSERT INTO prayer_records
-     (user_id, prayer_name, prayer_date, completed)
-     VALUES ($1, $2, $3, $4)
-     ON CONFLICT (prayer_name, user_id, prayer_date)
-     DO UPDATE SET completed = EXCLUDED.completed`,
-    [req.session.userId, prayerName, prayerDate, completed]
-);
+        `INSERT INTO prayer_records
+        (user_id, prayer_name, prayer_date, completed)
+        VALUES ($1, $2, $3, $4)
+        ON CONFLICT (prayer_name, user_id, prayer_date)
+        DO UPDATE SET completed = EXCLUDED.completed`
+    );
 
     return res.status(200).json({
         success: true,
@@ -567,3 +553,57 @@ try {
 }
 
 })
+
+app.get("/getprayerrecords", async (req, res) => {
+if (!req.session?.userId) {
+    return res.status(401).json({
+        error: "FAILED TO AUTH!",
+        message: "Please log in first!"
+    });
+}
+try {
+    const result = await db.query(
+        "SELECT * FROM prayer_records WHERE user_id = $1 ORDER BY prayer_date DESC",
+        [req.session.userId]
+    );
+    return res.status(200).json({
+    success: true,
+    records: result.rows
+});
+}
+catch (error) {
+    console.error("Get prayer records error:", error);
+    return res.status(500).json({
+        success: false,
+        error: "Failed to fetch prayer records"
+    });
+}
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const PORT = process.env.PORT || 3000;
+initializeDatabase()
+    .then(() => {
+        console.log("Neon database initialized!");
+
+        app.listen(PORT, () => {
+            console.log(`API running on port ${PORT}`);
+        });
+    })
+    .catch((error) => {
+        console.error("Database initialization failed:", error);
+        process.exit(1);
+    });
