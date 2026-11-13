@@ -1,0 +1,60 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "ChanceryLaneBold";
+}
+@font-face {
+    font-family: "ChanceryLaneBold";
+    src: url("fonts/ChanceryLaneBold.ttf") format("Truetype");
+    font-display: swap;
+}
+
+body {
+    min-height: 100vh;
+    background: #071c16;
+    color: #f5f0dc;
+}
+
+header {
+    padding: 30px;
+    text-align: center;
+    background: #0c3023;
+    border-bottom: 2px solid #c6a75e;
+}
+
+header h1 {
+    color: #e2c477;
+    margin-bottom: 10px;
+}
+
+main {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 30px;
+    text-align: center;
+}
+
+main h2 {
+    color: #e2c477;
+    margin-bottom: 15px;
+}
+.container {
+    background-color: #0c3023;
+    border-radius: 10px;
+    display: flex;
+    padding: 30px;
+    max-width: 50%;
+    margin:auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+.container h2 {
+    text-align: center;
+}
+.container input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}

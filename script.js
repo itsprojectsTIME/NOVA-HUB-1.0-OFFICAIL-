@@ -209,7 +209,7 @@ async function prayertime() {
 
         // Display prayer times
         document.getElementById("fajr").textContent = `${fajr} - Fajr`;
-        document.getElementById("duhr").textContent = `${dhuhr} - Dhuhr`;
+        document.getElementById("dhuhr").textContent = `${dhuhr} - Dhuhr`;
         document.getElementById("asr").textContent = `${asr} - Asr`;
         document.getElementById("maghrib").textContent = `${maghrib} - Maghrib`;
         document.getElementById("isha").textContent = `${isha} - Isha`;

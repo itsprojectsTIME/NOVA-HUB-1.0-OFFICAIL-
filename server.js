@@ -505,3 +505,12 @@ initializeDatabase()
         console.error("Database initialization failed:", error);
         process.exit(1);
     });
+app.post("/saveprayer", (req, res) => {
+    if (!req.session?.userId) {
+        return req.status(401).json({
+            error: "FAILED TO AUTH!",
+            message:"Please log in for more features!"
+        })
+    }
+    
+})
