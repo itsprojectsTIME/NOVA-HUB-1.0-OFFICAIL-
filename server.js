@@ -505,12 +505,20 @@ initializeDatabase()
         console.error("Database initialization failed:", error);
         process.exit(1);
     });
-app.post("/saveprayer", (req, res) => {
+app.post("/saveprayer", async (req, res) => {
     if (!req.session?.userId) {
-        return req.status(401).json({
+        return res.status(401).json({
             error: "FAILED TO AUTH!",
             message:"Please log in for more features!"
         })
     }
-    
+    const prayerName = req.body.prayer_name;
+    const completed = req.body.completed;
+await db.query(
+    `INSERT INTO prayer_records
+     (user_id, prayer_name, prayer_date, completed)
+     VALUES ($1, $2, $3, $4)`,
+    [req.session.userId, prayerName, prayerDate, completed]
+);
+
 })
