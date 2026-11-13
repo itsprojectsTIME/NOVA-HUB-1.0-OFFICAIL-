@@ -139,7 +139,13 @@ async function getprayerrecords() {
     const data = await response.json();
     console.log(data)
     data.records.forEach(record => {
-    console.log(record.prayer_name, record.completed);
+    const checkbox = document.getElementById(
+    record.prayer_name.toLowerCase() + "-check"
+);
+
+if (checkbox) {
+    checkbox.checked = record.completed;
+}
 });
 }
 getprayerrecords();
