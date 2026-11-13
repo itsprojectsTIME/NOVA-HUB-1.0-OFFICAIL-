@@ -544,12 +544,13 @@ if (
 }
 try {
     await db.query(
-        `INSERT INTO prayer_records
-        (user_id, prayer_name, prayer_date, completed)
-        VALUES ($1, $2, $3, $4)
-        ON CONFLICT (prayer_name, user_id, prayer_date)
-        DO UPDATE SET completed = EXCLUDED.completed`
-    );
+    `INSERT INTO prayer_records
+     (user_id, prayer_name, prayer_date, completed)
+     VALUES ($1, $2, $3, $4)
+     ON CONFLICT (prayer_name, user_id, prayer_date)
+     DO UPDATE SET completed = EXCLUDED.completed`,
+    [req.session.userId, prayerName, prayerDate, completed]
+);
 
     return res.status(200).json({
         success: true,
