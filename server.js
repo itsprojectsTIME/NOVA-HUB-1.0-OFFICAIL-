@@ -514,11 +514,55 @@ app.post("/saveprayer", async (req, res) => {
     }
     const prayerName = req.body.prayer_name;
     const completed = req.body.completed;
-await db.query(
-    `INSERT INTO prayer_records
-     (user_id, prayer_name, prayer_date, completed)
-     VALUES ($1, $2, $3, $4)`,
-    [req.session.userId, prayerName, prayerDate, completed]
-);
+    const prayerDate = req.body.prayer_date;
+    const allowedPrayers = [
+    "Fajr",
+    "Dhuhr",
+    "Asr",
+    "Maghrib",
+    "Isha"
+];
+
+if (!allowedPrayers.includes(prayerName)) {
+    return res.status(400).json({
+        error: "Invalid prayer name"
+    });
+}
+if (typeof completed !== "boolean") {
+    return res.status(400).json({
+        error: "Invalid completion value"
+    });
+}
+if (
+    typeof prayerDate !== "string" ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(prayerDate) ||
+    Number.isNaN(Date.parse(prayerDate))
+) {
+    return res.status(400).json({
+        error: "Invalid prayer date"
+    });
+}
+try {
+    await db.query(
+        `INSERT INTO prayer_records
+        (user_id, prayer_name, prayer_date, completed)
+        VALUES ($1, $2, $3, $4)
+        ON CONFLICT (prayer_name, user_id, prayer_date)
+        DO UPDATE SET completed = EXCLUDED.completed`
+    );
+
+    return res.status(200).json({
+        success: true,
+        message: "Prayer saved successfully!"
+    });
+
+} catch (error) {
+    console.error("Save prayer error:", error);
+
+    return res.status(500).json({
+        success: false,
+        error: "Failed to save prayer"
+    });
+}
 
 })
