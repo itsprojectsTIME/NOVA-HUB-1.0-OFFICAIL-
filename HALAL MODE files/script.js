@@ -133,7 +133,9 @@ if (cityInput) {
 prayertime();
 const link = `https://nova-hub-1-0-api.onrender.com/getprayerrecords`
 async function getprayerrecords() {
-    const response = await fetch(link)
+    const response = await fetch(link, {
+    credentials: "include"
+});
     const data = await response.json();
     console.log(data)
 }
