@@ -8,7 +8,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const { db, initializeDatabase } = require("./database/db");
-const athkar = require("./data/athkar.json");
+const athkar = require("./HALAL MODE files/data/athkar.json");
 
 
 const app = express();
