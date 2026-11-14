@@ -149,3 +149,66 @@ if (checkbox) {
 });
 }
 getprayerrecords();
+function updateCompletionMessage() {
+    const prayers = [
+        "fajr-check",
+        "dhuhr-check",
+        "asr-check",
+        "maghrib-check",
+        "isha-check"
+    ];
+
+    const allCompleted = prayers.every(id =>
+        document.getElementById(id).checked
+    );
+
+    const message = document.getElementById("completion-message");
+
+    message.textContent = allCompleted
+        ? "🌙 Alhamdulillah! All five prayers completed today!"
+        : "";
+        const completedCount = prayers.filter(id =>
+    document.getElementById(id).checked
+).length;
+
+document.getElementById("prayer-progress").textContent =
+    `${completedCount} / 5 prayers completed`;
+}
+document.querySelectorAll('#prayercounts input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener("change", updateCompletionMessage);
+    
+});
+function openAdhkar(type) {
+    const title = document.getElementById("adhkar-title");
+    const list = document.getElementById("adhkar-list");
+    const filteredAdhkar = adhkarData.filter(item =>
+    item.dhikr.time_of_day === type.toLowerCase() ||
+    item.dhikr.time_of_day === "both"
+);
+console.log(adhkarData.map(item => item.dhikr.time_of_day));
+
+    title.textContent = type + " Adhkar";
+    list.textContent = type === "Morning"
+    ? "أصبحنا وأصبح الملك لله"
+    : "أمسينا وأمسى الملك لله";
+}
+
+document.getElementById("morning-adhkar").addEventListener("click", () => {
+    openAdhkar("Morning");
+});
+
+document.getElementById("evening-adhkar").addEventListener("click", () => {
+    openAdhkar("Evening");
+});
+updateCompletionMessage();
+let adhkarData = [];
+async function getadhkar() {
+    const res = await fetch('https://athkar-api.thkeecdn.com/v1/collections/morning-evening');
+    const { items } = await res.json();
+    adhkarData = items;
+    console.log([...new Set(
+    adhkarData.map(item => item.dhikr.time_of_day)
+)]);
+    console.log(adhkarData[0]);
+}
+getadhkar();

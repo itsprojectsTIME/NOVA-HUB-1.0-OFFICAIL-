@@ -19,6 +19,7 @@
         <h2>Welcome to Halal Mode</h2>
         <p>Your new experience starts here.</p>
         <h2 id="date"></h2>
+        <p id="prayer-progress">0 / 5 prayers completed</p>
         <div id="prayercounts" class="container">
             <h4 id="fajr">LOADING-fajr</h4>
             <input type="checkbox" id="fajr-check">
@@ -30,10 +31,24 @@
             <input type="checkbox" id="maghrib-check">
             <h4 id="isha">LOADING-isha</h4>
             <input type="checkbox" id="isha-check">
+            <p id="completion-message"></p>
         </div>
         <div>
 
         </div>
+        <section id="adhkar-center">
+    <h2>🌙 Adhkar Center</h2>
+    <p>Your daily remembrance of Allah.</p>
+
+    <div class="adhkar-options">
+        <button id="morning-adhkar">Morning Adhkar</button>
+        <button id="evening-adhkar">Evening Adhkar</button>
+    </div>
+    <div id="adhkar-content">
+    <h3 id="adhkar-title"></h3>
+    <div id="adhkar-list"></div>
+</div>
+</section>
     </main>
 
     <script src="script.js"></script>

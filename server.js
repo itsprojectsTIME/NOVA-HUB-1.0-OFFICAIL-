@@ -8,6 +8,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const { db, initializeDatabase } = require("./database/db");
+const athkar = require("./data/athkar.json");
 
 
 const app = express();
@@ -579,6 +580,9 @@ catch (error) {
     });
 }
 })
+app.get("/athkar", (req, res) => {
+    res.json(athkar)
+});
 
 
 
