@@ -181,34 +181,70 @@ document.querySelectorAll('#prayercounts input[type="checkbox"]').forEach(checkb
 function openAdhkar(type) {
     const title = document.getElementById("adhkar-title");
     const list = document.getElementById("adhkar-list");
-    const filteredAdhkar = adhkarData.filter(item =>
-    item.dhikr.time_of_day === type.toLowerCase() ||
-    item.dhikr.time_of_day === "both"
-);
-console.log(adhkarData.map(item => item.dhikr.time_of_day));
-
-    title.textContent = type + " Adhkar";
-    list.textContent = type === "Morning"
-    ? "أصبحنا وأصبح الملك لله"
-    : "أمسينا وأمسى الملك لله";
+        title.textContent = type + " Adhkar";
+currentAdhkar = type === "Morning"
+    ? adhkarData["أذكار الصباح"]
+    : adhkarData["أذكار المساء"];
+currentIndex = 0;
+remainingCount = Number(currentAdhkar[currentIndex].count);
+list.textContent = currentAdhkar[currentIndex].content;
 }
 
 document.getElementById("morning-adhkar").addEventListener("click", () => {
     openAdhkar("Morning");
+    document.getElementById("adhkar-counter-left").textContent = "1/25";
+    document.getElementById("repeat-counter").textContent = remainingCount
 });
 
 document.getElementById("evening-adhkar").addEventListener("click", () => {
     openAdhkar("Evening");
+    document.getElementById("adhkar-counter-left").textContent = "1/25";
+    document.getElementById("repeat-counter").textContent = remainingCount
 });
 updateCompletionMessage();
 let adhkarData = [];
 async function getadhkar() {
-    const res = await fetch('https://athkar-api.thkeecdn.com/v1/collections/morning-evening');
-    const { items } = await res.json();
-    adhkarData = items;
-    console.log([...new Set(
-    adhkarData.map(item => item.dhikr.time_of_day)
-)]);
-    console.log(adhkarData[0]);
+    const res = await fetch('https://nova-hub-1-0-api.onrender.com/athkar');
+    const  data = await res.json();
+    adhkarData = data;
+    console.log("Adhkar loaded!");
+    console.log(adhkarData["أذكار الصباح"][0]);
+    console.log(adhkarData)
+    
 }
+document.getElementById("repeat-button").addEventListener("click", () => {
+    if (remainingCount > 0) {
+        remainingCount--;
+        document.getElementById("repeat-counter").textContent = remainingCount
+    }
+})
+    let currentAdhkar = [];
+    let remainingCount = 0;
+    let currentIndex = 0;
+
+    `${currentIndex + 1}/${currentAdhkar.length}`
 getadhkar();
+document.getElementById("next").addEventListener("click", () => {
+    if (currentIndex < currentAdhkar.length - 1) {
+        currentIndex++
+        remainingCount = Number(currentAdhkar[currentIndex].count);
+document.getElementById("repeat-counter").textContent = remainingCount;
+        document.getElementById("adhkar-counter-left").textContent = "1/25";
+        document.getElementById("adhkar-counter-left").textContent = `${currentIndex + 1}/25`
+        document.getElementById("adhkar-list").textContent = `${currentAdhkar[currentIndex].content}`
+    }
+    else {
+        console.log(currentIndex)
+        document.getElementById("adhkar-list").textContent = "🌙 Alhamdulillah! You've completed your adhkar for today!"
+    }
+});
+document.getElementById("back").addEventListener("click", () => {
+    if (currentIndex > 0) {
+        currentIndex--
+        remainingCount = Number(currentAdhkar[currentIndex].count);
+document.getElementById("repeat-counter").textContent = remainingCount;
+        document.getElementById("adhkar-list").textContent = `${currentAdhkar[currentIndex].content}`
+        document.getElementById("adhkar-counter-left").textContent =
+    `${currentIndex + 1}/25`;
+    }
+});

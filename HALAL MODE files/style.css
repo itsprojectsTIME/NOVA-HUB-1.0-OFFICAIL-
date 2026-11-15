@@ -10,17 +10,26 @@
     src: url("fonts/ChanceryLaneBold.ttf") format("Truetype");
     font-display: swap;
 }
-
+@font-face {
+    font-family: "TufuliArabicDEMO-Regular";
+    src: url("fonts/TufuliArabicDEMO-Regular.otf") format("Opentype");
+    font-display: swap;
+}
+@font-face {
+    font-family: "TufuliArabicDEMO-bold";
+    src: url("fonts/TufuliArabicDEMO-Bold.otf") format("Opentype");
+    font-display: swap;
+}
 body {
     min-height: 100vh;
-    background:linear-gradient(134deg, #0a2920, #0b2f0e, #0c3023);
+    background:linear-gradient(134deg, #0b4e17, #0e3c12, #647205);
     color: #f5f0dc;
 }
 
 header {
     padding: 30px;
     text-align: center;
-    background: #0c3023;
+    background: #0e4833;
     border-bottom: 2px solid #c6a75e;
 }
 
@@ -143,4 +152,58 @@ main h2 {
 #adhkar-title {
     color: #e2c477;
     margin-bottom: 15px;
+    font-family: TufuliArabicDEMO-Regular;
+}
+#adhkar-list {
+    font-family:TufuliArabicDEMO-Regular;
+}
+#next {
+    font-size: 20px;
+    padding: 15px;
+    gap:20px;
+    justify-content: space-between;
+    background: linear-gradient(100deg,#0c3023, #0b2f0e, #071c16);
+    border:none;
+    color: #e0a928;
+    margin-left: 90px;
+    transition: 0.2s ease-in-out;
+    box-shadow: 0 0 13px #e0a928;
+    border-radius: 14px;
+    margin-top: 20px;
+}
+#back {
+    font-size: 20px;
+    padding: 15px;
+    gap:20px;
+    justify-content: space-between;
+    background: linear-gradient(100deg,#0c3023, #0b2f0e, #071c16);
+    border:none;
+    color: #e0a928;
+    transition: 0.2s ease-in-out;
+    box-shadow: 0 0 13px #e0a928;
+    border-radius: 14px;
+    margin-top: 20px;
+}
+#repeat-button {
+    font-size: 20px;
+    padding: 15px;
+    gap:20px;
+    justify-content: space-between;
+    background: linear-gradient(100deg,#0c3023, #0b2f0e, #071c16);
+    border:none;
+    color: #e0a928;
+    transition: 0.2s ease-in-out;
+    box-shadow: 0 0 13px #e0a928;
+    border-radius: 14px;
+    margin-top: 20px;
+}
+#back:hover,
+#next:hover,
+#repeat-button:hover {
+    transform: translateY(-5px);
+    transition: 0.2s;
+    cursor: pointer;
+}
+#remainingCount {
+    padding-top: 20px;
 }
