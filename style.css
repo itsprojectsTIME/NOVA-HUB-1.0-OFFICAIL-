@@ -391,7 +391,7 @@ nav a:active {
     box-shadow: 0 0 15px #8055d9;
 }
 #messageInput {
-    width: 100%;
+    width: 50%;
     min-height: 80px;
     margin-top: 15px;
     padding: 12px;
