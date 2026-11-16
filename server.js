@@ -9,6 +9,8 @@ dotenv.config();
 
 const { db, initializeDatabase } = require("./database/db");
 const athkar = require("./HALAL MODE files/data/athkar.json");
+const troll = require("./HALAL MODE files/data/troll.json");
+const troll2 = require("./HALAL MODE files/data/troll2.json");
 
 
 const app = express();
@@ -583,8 +585,12 @@ catch (error) {
 app.get("/athkar", (req, res) => {
     res.json(athkar)
 });
-
-
+app.get("/troll", async (req, res) => {
+    res.json(troll)
+})
+app.get("/troll2", async (req, res) => {
+    res.json(troll2)
+})
 
 
 

@@ -1,0 +1,27 @@
+[
+	
+	{
+		"pack_id" : "90d244b2-91e5-495f-a416-9f2bf487bb00",
+		"version" : [ 1, 0, 0 ]
+	},
+	
+	{
+		"pack_id" : "2cf066eb-1254-4b7d-affb-80fe3216b18c",
+		"version" : [ 1, 1, 39 ]
+	},
+
+        {
+        	"pack_id" : "7477870a-d721-44a1-beb6-5b39f9049e27",
+		"version" : [ 1, 1, 15 ]
+        },
+
+        {
+        	"pack_id" : "c0ba4bd8-387b-4b0f-95b1-05d9259d8cbb",
+		"version" : [ 0, 0, 1 ]
+        },
+
+        {
+        	"pack_id" : "3adb5fce-a068-4d6c-8d43-66e8a13dff60",
+		"version" : [ 1, 0, 8 ]
+        }
+]
