@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Welcome to Halal Mode!");
 });
 let country = "saudi arabia";
-let city = localStorage.getItem("city") || "Select";
+let city = localStorage.getItem("city") || "Riyadh";
 
 let url = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=4`;
 
@@ -129,6 +129,7 @@ const cityInput = document.getElementById("cityname");
 
 if (cityInput) {
     cityInput.value = city;
+    cityInput.addEventListener("change", changecity);
 }
 prayertime();
 const link = `https://nova-hub-1-0-api.onrender.com/getprayerrecords`

@@ -152,7 +152,6 @@ main h2 {
 #adhkar-title {
     color: #e2c477;
     margin-bottom: 15px;
-    font-family: TufuliArabicDEMO-Regular;
 }
 #adhkar-list {
     font-family:TufuliArabicDEMO-Regular;
@@ -206,4 +205,59 @@ main h2 {
 }
 #remainingCount {
     padding-top: 20px;
+}
+#cityname {
+    background: hsl(142, 80%, 15%);
+    border-radius: 10px;
+    padding: 15px;
+    color: #c6a75e;
+    box-shadow: 0 0 8px #6e8b32;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+#cityname:hover {
+    box-shadow: 0 0 12px #ddea26;
+}
+
+#cityname option {
+    background: #e6cd2a;
+    color: #043312;
+    cursor: pointer;
+}
+
+#submit-city {
+    background-color: #0b4e17;
+    border: 2px solid #24da46;
+    border-radius: 17px;
+    padding: 16px;
+    color: #0a2609;
+    cursor: pointer;
+}
+#selectcity h1 {
+    color: #f2ff80;
+}
+#selectcity {
+    background: #f2ff00;
+    border: 2px solid #0b4e17;
+    border-radius: 15px;
+    padding: 20px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+#selectcity button:hover {
+    box-shadow: 0 0 12px #ecd297;
+    transition: 0.3s;
+}
+#cityname:active {
+    background: #948e26;
+    transition: 0.2s;
+}
+#submit-city:active {
+    background: #dfe216;
+    transition: 0.2s;
 }
