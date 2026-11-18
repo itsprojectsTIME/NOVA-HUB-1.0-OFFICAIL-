@@ -538,7 +538,7 @@ try {
         (user_id, prayer_name, prayer_date, completed)
         VALUES ($1, $2, $3, $4)
         ON CONFLICT (prayer_name, user_id, prayer_date)
-        DO UPDATE SET completed = EXCLUDED.completed`
+        DO UPDATE SET completed = EXCLUDED.completed`,
         [
     req.session.userId,
     prayerName,

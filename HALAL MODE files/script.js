@@ -177,7 +177,20 @@ document.getElementById("prayer-progress").textContent =
 }
 document.querySelectorAll('#prayercounts input[type="checkbox"]').forEach(checkbox => {
     checkbox.addEventListener("change", updateCompletionMessage);
-    
+    checkbox.addEventListener("change", () => {
+    fetch("https://nova-hub-1-0-api.onrender.com/saveprayer", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+    "Content-Type": "application/json"
+},
+body: JSON.stringify({
+    prayer_name: "Dhuhr",
+    completed: true,
+    prayer_date: "2026-11-18"
+})
+    });
+});
 });
 function openAdhkar(type) {
     const title = document.getElementById("adhkar-title");
