@@ -261,3 +261,56 @@ main h2 {
     background: #dfe216;
     transition: 0.2s;
 }
+#displayquran {
+    background: #f5f1e8;
+    padding: 24px;
+    border: 1px solid #ded4c1;
+    border-radius: 14px;
+}
+
+#displayquran .quran-toolbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    color: #344b3b;
+}
+
+#displayquran button {
+    background: #344b3b;
+    color: white;
+    border: none;
+    padding: 11px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#displayquran button:hover:not(:disabled) {
+    background: #496b52;
+}
+
+#displayquran button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.quran-canvas-container {
+    display: flex;
+    justify-content: center;
+    padding: 12px;
+}
+
+#quran-canvas {
+    max-width: 100%;
+    height: auto;
+    background: #fffdf7;
+    border: 1px solid #ded4c1;
+    border-radius: 4px;
+    box-shadow: 0 4px 16px rgba(50, 40, 20, 0.12);
+}
+
+#quran-canvas.page-changing {
+    opacity: 0;
+    transform: translateX(12px);
+}

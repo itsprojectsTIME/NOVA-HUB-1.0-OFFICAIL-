@@ -65,8 +65,28 @@
     <button id="back">back</button>
     <button id="next">next</button>
 </section>
+<section id="display">
+    <h2>📖 Read the Holy Quran</h2>
+    <p>Read the Quran directly inside Halal Mode.</p>
+
+<div id="displayquran">
+    <div class="quran-toolbar">
+        <button id="quran-prev">← Previous</button>
+        <span id="quran-page">Page 1 / 624</span>
+        <button id="quran-next">Next →</button>
+    </div>
+
+    <div class="quran-canvas-container">
+        <canvas id="quran-canvas"></canvas>
+    </div>
+
+    <p id="quran-loading">Loading the Holy Quran...</p>
+</div>
+</section>
     </main>
 
-    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="quran-reader.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
