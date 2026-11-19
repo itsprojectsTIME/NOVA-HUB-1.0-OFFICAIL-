@@ -11,7 +11,7 @@ const { db, initializeDatabase } = require("./database/db");
 const athkar = require("./HALAL MODE files/data/athkar.json");
 const troll = require("./HALAL MODE files/data/troll.json");
 const troll2 = require("./HALAL MODE files/data/troll2.json");
-const quran = ("./HALAL MODE files/data/standard2-quran.pdf");
+const { Readable } = require("node:stream");
 
 const app = express();
 app.use(cors({
@@ -597,8 +597,37 @@ app.get("/troll", async (req, res) => {
 app.get("/troll2", async (req, res) => {
     res.json(troll2)
 })
-app.get("/quran", (req, res) => {
-    res.redirect("https://github.com/itsprojectsTIME/NOVA-HUB-1.0-OFFICAIL-/releases/download/v1.0.0/standard2-quran.pdf");
+app.get("/quran", async (req, res) => {
+    try {
+        const pdfUrl = "https://github.com/itsprojectsTIME/NOVA-HUB-1.0-OFFICAIL-/releases/download/v1.0.0/standard2-quran.pdf";
+
+        const headers = {};
+        if (req.headers.range) {
+            headers.Range = req.headers.range;
+        }
+
+        const response = await fetch(pdfUrl, { headers });
+
+        if (!response.ok && response.status !== 206) {
+            return res.status(response.status).send("Could not load Quran PDF");
+        }
+
+        res.status(response.status);
+        res.setHeader("Content-Type", "application/pdf");
+        res.setHeader("Content-Disposition", 'inline; filename="quran.pdf"');
+        res.setHeader("Accept-Ranges", "bytes");
+
+        for (const header of ["content-length", "content-range"]) {
+            const value = response.headers.get(header);
+            if (value) res.setHeader(header, value);
+        }
+
+        Readable.fromWeb(response.body).pipe(res);
+
+    } catch (error) {
+        console.error("Quran PDF error:", error);
+        res.status(500).send("Unable to load Quran PDF");
+    }
 });
 
 
