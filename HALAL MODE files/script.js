@@ -1,6 +1,5 @@
 
-console.log("🌙 Halal Mode loaded successfully!");
-
+const timestamp = new Date().toISOString().split("T")[0];
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Welcome to Halal Mode!");
 });
@@ -138,7 +137,6 @@ async function getprayerrecords() {
     credentials: "include"
 });
     const data = await response.json();
-    console.log(data)
     data.records.forEach(record => {
     const checkbox = document.getElementById(
     record.prayer_name.toLowerCase() + "-check"
@@ -185,9 +183,9 @@ document.querySelectorAll('#prayercounts input[type="checkbox"]').forEach(checkb
     "Content-Type": "application/json"
 },
 body: JSON.stringify({
-    prayer_name: "Dhuhr",
-    completed: true,
-    prayer_date: "2026-11-18"
+    prayer_name: checkbox.value,
+    completed:checkbox.checked,
+    prayer_date: `${timestamp}`
 })
     });
 });
@@ -221,9 +219,6 @@ async function getadhkar() {
     const res = await fetch('https://nova-hub-1-0-api.onrender.com/athkar');
     const  data = await res.json();
     adhkarData = data;
-    console.log("Adhkar loaded!");
-    console.log(adhkarData["أذكار الصباح"][0]);
-    console.log(adhkarData)
     
 }
 document.getElementById("repeat-button").addEventListener("click", () => {
@@ -262,3 +257,21 @@ document.getElementById("repeat-counter").textContent = remainingCount;
     `${currentIndex + 1}/25`;
     }
 });
+async function checkLogin() {
+    const response = await fetch(
+        "https://nova-hub-1-0-api.onrender.com/profile",
+        {
+            credentials: "include"
+        }
+    );
+
+    const data = await response.json();
+    if (data.success) {
+    console.log("Welcome, " + data.username);
+    document.getElementById("welcome").textContent = "Welcome to Halal Mode ,"  +  data.username
+} else {
+    console.log("Not logged in!");
+}
+    console.log(data);
+}
+checkLogin();

@@ -4,3 +4,4 @@ database/*.db
 .agents
 skills-lock.json
 .vscode
+HALAL MODE files/data/standard2-quran.pdf
