@@ -11,7 +11,7 @@ const { db, initializeDatabase } = require("./database/db");
 const athkar = require("./HALAL MODE files/data/athkar.json");
 const troll = require("./HALAL MODE files/data/troll.json");
 const troll2 = require("./HALAL MODE files/data/troll2.json");
-const quran = require("./HALAL MODE files/data/standard2-quran.pdf");
+const quran = ("./HALAL MODE files/data/standard2-quran.pdf");
 
 const app = express();
 app.use(cors({
@@ -597,9 +597,9 @@ app.get("/troll", async (req, res) => {
 app.get("/troll2", async (req, res) => {
     res.json(troll2)
 })
-app.get("quran", (req, res) => {
-    res.pdf(quran)
-})
+app.get("/quran", (req, res) => {
+    res.redirect("https://github.com/itsprojectsTIME/NOVA-HUB-1.0-OFFICAIL-/releases/download/v1.0.0/standard2-quran.pdf");
+});
 
 
 
