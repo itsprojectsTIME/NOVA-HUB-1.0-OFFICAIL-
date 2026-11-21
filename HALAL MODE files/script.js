@@ -1,4 +1,5 @@
 
+const timestamp = new Date().toISOString().split("T")[0];
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Welcome to Halal Mode!");
 });
@@ -189,7 +190,7 @@ body: JSON.stringify({
     });
 });
 });
-const timestamp = new Date(timestamp).toLocaleString().split("T")[0];
+new Date(timestamp).toLocaleString();
 function openAdhkar(type) {
     const title = document.getElementById("adhkar-title");
     const list = document.getElementById("adhkar-list");
