@@ -1,6 +1,5 @@
 
-
-const timestamp = new Date().toISOString().split("T")[0];
+const timestamp = new Date(timestamp).toLocaleString().split("T")[0];
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Welcome to Halal Mode!");
 });
