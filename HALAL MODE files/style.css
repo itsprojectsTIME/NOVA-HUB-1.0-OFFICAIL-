@@ -314,3 +314,17 @@ main h2 {
     opacity: 0;
     transform: translateX(12px);
 }
+#loginlink {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    margin: 20px auto;
+    color: #e2c477;
+    font-size: 20px;
+    transition: 0.2s;
+}
+
+#loginlink:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px #e0a928;
+}

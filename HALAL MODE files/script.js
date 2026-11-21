@@ -1,4 +1,5 @@
 
+
 const timestamp = new Date().toISOString().split("T")[0];
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Welcome to Halal Mode!");
@@ -269,8 +270,22 @@ async function checkLogin() {
     if (data.success) {
     console.log("Welcome, " + data.username);
     document.getElementById("welcome").textContent = "Welcome to Halal Mode ,"  +  data.username
-} else {
+    }
+else {
     console.log("Not logged in!");
+
+    const loginLink = document.createElement("a");
+
+    loginLink.href = "https://nova-hub.darknova.workers.dev/login";
+    loginLink.textContent = "please login in through here";
+    loginLink.id = "loginlink"
+
+    document.body.appendChild(loginLink);
+const message = document.getElementById("displayiflogin");
+
+message.textContent = "Please log in to access your prayer records.";
+
+message.appendChild(loginLink);
 }
     console.log(data);
 }
